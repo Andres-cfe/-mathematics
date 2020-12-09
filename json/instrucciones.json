@@ -1,0 +1,18 @@
+{
+	"suma_enteros":
+		[
+			"Las cifras se acomodan de derecha a izquierda y se suman en el mismo orden.",
+			"Cuando la suma supera dos cifras, la de la izquierda se coloca en la siguiente hilera"
+		],
+	"suma_decimales":
+		[	
+			"instruccion1 aqui",
+			"instruccion2 aqui"
+		],
+	"resta_enteros":
+		[
+			"instruccion1",
+			"instruccion2"
+		]
+	
+}

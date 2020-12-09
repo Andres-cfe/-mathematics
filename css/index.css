@@ -211,3 +211,11 @@ section #services li div:hover {
     border-radius: 2rem;
     color: white;
 }
+
+.simbol{
+  color: red;  
+}
+
+.numtwo{
+  border-bottom: solid 4px red;
+}
