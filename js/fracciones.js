@@ -32,16 +32,19 @@ function restar(numerador1,denominador1, numerador2, denominador2 ){
 }
 
 function multiplicar(numerador1,denominador1, numerador2, denominador2 ){
-    resultado=num1*num2
-    return resultado
+    let resultadoNumerador=0
+    let resultadoDenominador=0
+    resultadoNumerador=numerador1 * numerador2
+    resultadoDenominador=denominador1 * denominador2
+    return resultadoNumerador, resultadoDenominador
 }
 
 function dividir(numerador1,denominador1, numerador2, denominador2 ){
-    resultado=num1/num2
-    return resultado
+    let resultadoNumerador=0
+    let resultadoDenominador=0
+    resultadoNumerador=numerador1 * denominador2
+    resultadoDenominador=numerador2 * denominador1
+    return resultadoNumerador, resultadoDenominador
 }
 
-function (){
-
-}
 
