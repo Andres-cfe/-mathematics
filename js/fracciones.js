@@ -48,3 +48,24 @@ function dividir(numerador1,denominador1, numerador2, denominador2 ){
 }
 
 
+function representar(numerador1, denominador1){
+    return numerador1, denominador1
+}
+
+function mayorMenorque(numerador1,denominador1, numerador2, denominador2 ){
+    let fraccionizq, fraccionderecha
+    let mensaje=""
+    fraccionizq=numerador1*denominador2
+    fraccionderecha=numerador2*denominador1
+    if(fraccionizq>fraccionderecha){
+        mensaje="Es mayor que"
+    }
+    else if(fraccionizq<fraccionderecha){
+        mensaje="Es menor que"
+    }
+    else{
+        mensaje="Es igual que"
+    }
+    return mensaje
+}
+
