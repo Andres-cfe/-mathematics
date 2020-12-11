@@ -1,17 +1,4 @@
-// Pagina de operaciones
-<<<<<<< HEAD
 
-
-function multiplicar(num1, num2){
-    resultado=num1*num2
-    return resultado
-}
-
-function dividir(num1,num2){
-    resultado=num1/num2
-    return resultado
-}
-=======
 function sumar(numerador1,denominador1, numerador2, denominador2 ){
     let resultadoNumerador=0
     let resultadoDenominador=0
@@ -82,4 +69,3 @@ function mayorMenorque(numerador1,denominador1, numerador2, denominador2 ){
     return mensaje
 }
 
->>>>>>> pruebas
