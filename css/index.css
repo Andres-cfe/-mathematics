@@ -1,6 +1,11 @@
 body{
   background:#ece5e5 ;
 }
+.subtitulos{
+  font-size: 17px;
+  color: #2c81b8;
+  font-weight: 500;
+}
 .active{
 	display: block;
 }
@@ -183,6 +188,9 @@ section #services li div:hover {
   border-radius: 100px;
 }
 /*operaciones */
+.instrucciones{
+  margin: 25px;
+}
 .bg-yellow{
   cursor: pointer;
   float: left;
@@ -218,4 +226,29 @@ section #services li div:hover {
 
 .numtwo{
   border-bottom: solid 4px red;
+}
+.numero:disabled{
+    color: #b81b48;
+    background-color: #f8f9fa;
+    border-color: #dc3545;
+    font-size: 15px;
+    padding: 0.5rem 6px;  
+    opacity: 1;
+}
+
+.card-instrucciones{
+  border: 5px solid #d749d4;
+  background-color: #7c217f;
+  text-align: center;
+  z-index: 4;
+  padding: 23px;
+  font-size: 17px;
+  border-radius: 2rem;
+  color: #f8f9fa;
+}
+.flecha{
+  margin-bottom: -1rem;
+  font-size: 49px;
+  margin-top: -1rem;
+  color: #7c217f;
 }

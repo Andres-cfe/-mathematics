@@ -1,6 +1,8 @@
 jQuery(document).ready(function($){
 
+
 var data = [];
+
 	//-----------------------------------------------------
 	//--------	DETERMINAR TIPO DE OPERACION  -------------
 	//-----------------------------------------------------
@@ -19,22 +21,27 @@ var data = [];
 	  	switch(tipo) {
 		  case 'suma-enteros':
 		    //titulo
-		    $('.descripcion .title').html('Suma de enteros');
+		    $('.numero').keypress(decimal);
+		    $('.descripcion .title').html('➤ Suma de enteros');
 		    $('#tipoOperacion').html('<strong>+</strong>');
+		    
 		    break;
 		  case 'suma-decimales':
 		    //titulo
-		    $('.descripcion .title').html('Suma de decimales');
+		    $('.numero').off('keypress');
+		    $('.descripcion .title').html('➤ Suma de decimales');
 		    $('#tipoOperacion').html('<strong>+</strong>');
 		    break;
 		  case 'resta-enteros':
 		    //titulo
-		    $('.descripcion .title').html('Resta de decimales');
+		    $('.numero').keypress(decimal);
+		    $('.descripcion .title').html('➤ Resta de decimales');
 		    $('#tipoOperacion').html('<strong>-</strong>');
 		    break;
 		  case 'resta-decimales':
 		    //titulo
-		    $('.descripcion .title').html('Resta de decimales');
+		    $('.numero').off('keypress');
+		    $('.descripcion .title').html('➤ Resta de decimales');
 		    $('#tipoOperacion').html('<strong>-</strong>');
 		    break;
 		  default:
@@ -69,6 +76,13 @@ var data = [];
 		var resultado = 0;
 		var val;
 		var num = [];
+		var res = [];
+		var res1= [];
+		var res2= [];
+		var res3= [];
+		var t_res;
+
+		$('.ejemplo').empty();
 
 		$( ".numero" ).each(function() {
 			if ($(this).val() != '') {
@@ -97,20 +111,99 @@ var data = [];
 		  		resultado = resultado + parseFloat(val);
 		  		
 			});
-
-		    $('#resultado').val(resultado);
+			var num1=$('#firstnumber').val();
+			var num2=$('#secondnumber').val();
+			
+		    
 		    if(categoria == 'enteros'){
-				$('.numone').html(Math.round($('#firstnumber').val()));
-		    	$('.numtwo').html(Math.round($('#secondnumber').val()));
-		    	$('.numresul').html(Math.round(resultado));
+		    	
+		    	$('#resultado').val(Math.round(resultado));
 		    	$('.operacion-desglosada').addClass('text-right').removeClass('text-left');
+		    	var num3=$('#resultado').val();
+		    	res1 = num1.split("");
+		    	res2 = num2.split("");
+		    	res3 = num3.split("");
+		    	var numpri;
+		    	var s_res;
+
+		    	$.each(res1, function(i, val){
+					$('.numone').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+		    	$.each(res2, function(i, val){
+					$('.numtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+		    	$.each(res3, function(i, val){
+					$('.numresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+
+				  var newnumone = [];
+				  if(res1.length >= res2.length){
+				    numpri = res1;
+				  }else{
+				    numpri = res2;
+				  }
+
+				  if(res1.length <= res2.length){
+				    nummen = res1;
+				  }else{
+				    nummen = res2;
+				  }
+
+				  if (res1.length == res2.length) {
+				  	numpri=res1;
+				  	nummen=res2;
+				  }
+
+				  var index = (nummen.length-1);
+				  for (var d = (numpri.length-1); d >= 0; d--) {
+				      console.log("valor d ",d, nummen[index]);
+				      if (nummen[index] == undefined) {
+				        newnumone[d] = 0;
+				      }else{
+				        newnumone[d] = parseInt(nummen[index]);
+				      }
+				      index--;
+				  }
+				  console.log("numone",numpri,"numtwo",newnumone);
+				  
+				  for(var r=(numpri.length-1);r>=0;r--){
+				  	if((numpri.length-1)==r){
+				  		t_res=parseInt(numpri[r])+newnumone[r];		
+				  		res[r]="&nbsp&nbsp";
+				  	}else {
+				  		if (res[r]=="&nbsp&nbsp") {
+				  			t_res=parseInt(numpri[r])+newnumone[r];
+				  		}else {
+				  			t_res=parseInt(numpri[r])+newnumone[r]+res[r];
+				  		}		  		
+
+				  	}
+				  		console.log(t_res);
+				  	if(t_res>=10){
+				  			res[r-1]=1;
+				  		}else{
+				  			res[r-1]="&nbsp&nbsp";
+				  		}	
+				  }
+				
+					for (var i = 0; i < newnumone.length; i++) {
+						console.log('residuo',res[i]);
+						$('.reside').append('<button type="button" class="btn numero mr-1" disabled><b>'+res[i]+'</b>');
+					}
+				
+				  console.log("corto",res,"nevo",newnumone);
 		    }else {
 				$('.numone').html($('#firstnumber').val());
 		    	$('.numtwo').html($('#secondnumber').val());
 		    	$('.numresul').html(resultado);
+		    	$('#resultado').val(resultado);
 		    	$('.operacion-desglosada').addClass('text-left').removeClass('text-right');
+		    	var dn = (dn + num1).split(".");
+		    	
+		    	console.log(dn);
 		    }
 		    
+
 		    $('.simbol').html('+');
 		    
 		    extractIntrucciones(operacion,categoria);
@@ -143,7 +236,9 @@ var data = [];
 
 	});
 
-
+	function decimal(tecla){
+		if(tecla.charCode < 48 || tecla.charCode > 57) return false;
+	}
 	function extractIntrucciones(operador,categoria){
 		var tipo = operador+'_'+categoria;
 		//console.log(tipo);
@@ -156,7 +251,8 @@ var data = [];
 		    });
 		   	$('.instrucciones').empty();
 			$.each(data, function(i, val){
-				$('.instrucciones').append('<p>'+val+'</p>');
+				$('.instrucciones').append('<div class="col-md-4 mb-3"><div class="card card-instrucciones h-100"><p>'+val+'</p>');
+				
 			});
 
 		  });
