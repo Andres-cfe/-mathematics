@@ -1,17 +1,34 @@
+// Pagina de operaciones
 
-function sumar(numerador1,denominador1, numerador2, denominador2 ){
+function sumar(){
+    let numerador1 = document.getElementById("numerador1").value;
+    let denominador1 = document.getElementById("denominador1").value;
+    let numerador2 = document.getElementById("numerador2").value;
+    let denominador2 = document.getElementById("denominador2").value;
+
+    let resresNumerador=0
     let resultadoNumerador=0
     let resultadoDenominador=0
+    let bandera=0
     if(denominador1==denominador2){
-        resultadoNumerador=numerador1 + numerador2
-        resultadoDenominador=denominador1 + denominador2
+        bandera=0
+        resresNumerador=parseInt(numerador1)  + parseInt(numerador2)
+        resultadoDenominador=denominador2
     }
     else{
+        bandera=1
         resultadoNumerador1=numerador1 * denominador2
         resultadoNumerador2=numerador2 * denominador1
         resultadoDenominador=denominador1*denominador2
         resresNumerador=resultadoNumerador1 + resultadoNumerador2
     }
+
+    console.log("Imprimiendo suma",resultadoDenominador, resresNumerador)
+    // document.querySelector('#label').innerText = 'Tu Valor';
+    document.getElementById('resultadonumerador').innerHTML=resresNumerador;
+    document.getElementById('resultadodenominador').innerHTML=resultadoDenominador;
+
+
     return resresNumerador, resultadoDenominador 
 }
 
