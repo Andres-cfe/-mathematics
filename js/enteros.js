@@ -79,7 +79,7 @@ var data = [];
 		var res = [];
 		var res1= [];
 		var res2= [];
-		var res3= [];
+		var res3= [];		
 		var t_res;
 
 		$('.ejemplo').empty();
@@ -118,8 +118,9 @@ var data = [];
 		    if(categoria == 'enteros'){
 		    	
 		    	$('#resultado').val(Math.round(resultado));
-		    	$('.operacion-desglosada').addClass('text-right').removeClass('text-left');
 		    	var num3=$('#resultado').val();
+		    	$('.operacion-desglosada').addClass('text-right').removeClass('text-left');
+		    	
 		    	res1 = num1.split("");
 		    	res2 = num2.split("");
 		    	res3 = num3.split("");
@@ -193,14 +194,42 @@ var data = [];
 				
 				  console.log("corto",res,"nevo",newnumone);
 		    }else {
-				$('.numone').html($('#firstnumber').val());
-		    	$('.numtwo').html($('#secondnumber').val());
-		    	$('.numresul').html(resultado);
+	
 		    	$('#resultado').val(resultado);
-		    	$('.operacion-desglosada').addClass('text-left').removeClass('text-right');
-		    	var dn = (dn + num1).split(".");
+		    	var num3=$('#resultado').val();
+		 
+		    	res1 = num1.split(".");
+		    	res2 = num2.split(".");
+		    	res3 = num3.split(".");
+		    	console.log(res3);
+		    	var ent1=res1[0].split("");
+		    	var dec1=res1[1].split("");
+		    	var ent2=res2[0].split("");
+		    	var dec2=res2[1].split("");
+		    	var ent3=res3[0].split("");
+		    	var dec3=res3[1].split("");
 		    	
-		    	console.log(dn);
+		    
+		    	$.each(ent1, function(i, val){
+					$('.numone').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+				$.each(dec1, function(i, val){
+					$('.numdone').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+		    	$.each(ent2, function(i, val){
+					$('.numtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+				$.each(dec2, function(i, val){
+					$('.numdtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+		    	$.each(ent3, function(i, val){
+					$('.numresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+				$.each(dec3, function(i, val){
+					$('.numdresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+
+		    	
 		    }
 		    
 
