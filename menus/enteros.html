@@ -81,7 +81,7 @@
                 </div>
                 <!--botones-->
                 <div class="mt"> <a href="#" tabindex="0" data="multiplicacion-enteros" class="btn-operacion btn bg-yellow m-4">Enteros</a>
-                <a href="#" tabindex="0" class="btn bg-yellow m-4">Decimales</a> </div>  
+                <a href="#" tabindex="0" data="multiplicacion-decimales" class="btn-operacion btn bg-yellow m-4">Decimales</a> </div>  
                                       
               </div>
             </div>
@@ -107,8 +107,8 @@
                     
                 </div>
                 <!--botones-->
-                <div class="mt"> <a href="#" tabindex="0" class="btn bg-yellow m-4">Enteros</a>
-                <a href="#" tabindex="0" class="btn bg-yellow m-4">Decimales</a> </div>  
+                <div class="mt"> <a href="#" tabindex="0" data="division-enteros" class="btn-operacion btn bg-yellow m-4">Enteros</a>
+                <a href="#" tabindex="0" data="division-decimales" class="btn-operacion btn bg-yellow m-4">Decimales</a> </div>  
                                       
               </div>
             </div>
@@ -147,61 +147,37 @@
 
         <div class="desarrollo col-lg-12 col-md-12 col-12 mt-4" style="display: none;">
             <p><b>Explicación</b></p>
-            <div class="offset-2  col-lg-8 col-md-8 col-12">
+            <div class="offset-lg-2  col-lg-10 col-md-10 col-12">
                 <div class="row">
-                    <div class="col-lg-1 col-md-1 col-1 mt-4 text-right">
-                          <h4 class="simbol">+</h4>  
-                    </div>
-                    <div class="operacion-desglosada col-lg-6 col-md-6 col-10" hidden>
-                      <div class="reside ejemplo">
+                    <div class="operacion-desglosada col-lg-7 col-md-7 col-10">
+                      <div class="row offset-lg-2 reside ejemplo">
                         
                       </div>
-                      <div class="numone ejemplo">
-                        
-                      </div>
-                      <p class="flecha">&#129044</p>
-                      <div class="numtwo ejemplo">
-                        
-                      </div>
-                      <br>
-                      <div class="numresul ejemplo">
-                        
-                      </div>
-                    </div>
-                    <div class="operaciondec-desglosada col-lg-6 col-md-6 col-10" >
-                      <div class="row ">
-                        <div class="reside ejemplo col-lg-7 col-md-7 col-7">
-                        
-                        </div>
-                        <div class="residde ejemplo col-lg-4 col-md-4 col-4">
-                        
-                        </div>
+                      <div class="row offset-lg-2 numone ejemplo">
+                       
                       </div>
                       <div class="row">
-                        <div class="numone ejemplo col-lg-7 col-md-7 col-7">
-                        
+                        <div class=" operador col-lg-4 col-md-4 col-4 mt-4 text-right">
+                          <h4 class="simbol">+</h4>  
                         </div>
-                        <button type="button" class="btn numero" disabled><b>.</b></button>
-                        <div class="numdone ejemplo col-lg-4 col-md-4 col-4">
-                          
-                        </div>
+                        <div class=" operador col-lg-6 col-md-6 col-6 mt-4 text-right">
+                          <p class="flecha">&#129044</p>
+                        </div>                      
+                      </div>
+                      <div class="row offset-lg-2 numtwo ejemplo linea-res">
+                       
+                      </div>
+                      <div class="row offset-lg-2 numresul ejemplo">
+                      
                       </div>
                       
-                      <p class="flecha">&#129044</p>
-                      <div class="numtwo ejemplo">
-                        
-                      </div>
-                      <div class="numdtwo ejemplo" >
-                        
-                      </div><br>
-                      <div class="numresul ejemplo">
-                        
-                      </div>
-                    </div>
-                </div>
+                    </div>                  
+                    
+                    
             </div>
-
+          </div>
         </div>
+
         <div class="instrucciones row">
           
         </div>
