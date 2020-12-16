@@ -198,7 +198,7 @@ section #services li div:hover {
   color: #1f1f20;
   background: #f9d105;
 }
-}
+
 
 .icon-oper{
   height: 90px;
@@ -229,9 +229,15 @@ section #services li div:hover {
   border-bottom: solid 4px red;
 }
 .numero:disabled{
-    color: #b81b48;
+    color: #211fc0;
     background-color: #f8f9fa;
     border-color: #dc3545;
+    font-size: 15px;
+    padding: 0.5rem 6px;  
+    opacity: 1;
+}
+.residuo:disabled{
+    color: #b81b48;
     font-size: 15px;
     padding: 0.5rem 6px;  
     opacity: 1;
@@ -252,4 +258,8 @@ section #services li div:hover {
   font-size: 49px;
   margin-top: -1rem;
   color: #7c217f;
+}
+.operacion-desglosada .ejemplo{
+   display: flex;
+   justify-content: flex-end;
 }
