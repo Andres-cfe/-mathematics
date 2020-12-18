@@ -7,8 +7,11 @@
 </head>
 <body>
     <link rel="stylesheet" type="text/css" href="./css/pruebas.css">
+    
+    
     <!-- Sumas -->
     <div>
+        <h5>Sumas de fracciones</h5>
             <p>
             <sup><input type="number" id="numerador1" > </sup> / <sub> <input type="number" id="denominador1"> </sub> + <sup><input type="number" id="numerador2" ></sup> / <sub><input type="number" id="denominador2"></sub> = <sup><label type="number" id=
                 "resultadonumerador" ></sup> / <sub><label type="number" id="resultadodenominador"></sub>
@@ -20,6 +23,7 @@
 
     <!-- Restas -->
     <div>
+        <h5>Resta de fracciones</h5>
         <p>
         <sup><input type="number" id="rnumerador1" > </sup> / <sub> <input type="number" id="rdenominador1"> </sub> - <sup><input type="number" id="rnumerador2" ></sup> / <sub><input type="number" id="rdenominador2"></sub> = <sup><label type="number" id=
             "rresultadonumerador" ></sup> / <sub><label type="number" id="rresultadodenominador"></sub>
@@ -31,6 +35,7 @@
 
      <!-- Multiplicacion -->
      <div>
+         <h5>Multiplicacion de fracciones</h5>
         <p>
         <sup><input type="number" id="mnumerador1" > </sup> / <sub> <input type="number" id="mdenominador1"> </sub> * <sup><input type="number" id="mnumerador2" ></sup> / <sub><input type="number" id="mdenominador2"></sub> = <sup><label type="number" id=
             "mresultadonumerador" ></sup> / <sub><label type="number" id="mresultadodenominador"></sub>
@@ -42,6 +47,7 @@
 
     <!-- Dividir -->
     <div>
+        <h5>Division de fracciones</h5>
         <p>
         <sup><input type="number" id="dnumerador1" > </sup> / <sub> <input type="number" id="ddenominador1"> </sub> ÷ <sup><input type="number" id="dnumerador2" ></sup> / <sub><input type="number" id="ddenominador2"></sub> = <sup><label type="number" id=
             "dresultadonumerador" ></sup> / <sub><label type="number" id="dresultadodenominador"></sub>
@@ -50,9 +56,55 @@
         <button onclick="dividir()">Dividir</button>
         <!-- <button id="sumar">Resultado</button> -->
     </div>
+    <!-- Comparacion de fracciones y equivalencias-->
+
+    <div>
+        <h5>Comparacion de fracciones y equivalencias</h5>
+        <p>
+            <sup><input type="number" id="compnumerador1" > </sup> / <sub> <input type="number" id="compdenominador1"> </sub> <input type="text" id="comp" value=">"> <sup><input type="number" id="compnumerador2" ></sup> / <sub><input type="number" id="compdenominador2"></sub> = <label id="compExplicacion"></label> <sup><label type="number" id=
+                "rcompnumerador" ></sup>  <sub><label type="number" id="rcompdenominador"></sub>
+            </p>
+            <!-- <input type="button" onclick="sumar()" value="SUMAR"> -->
+            <button onclick="comparar()">Comparar</button>
+    </div>
+    <!-- Conversion de fracciones a decimales -->
+    <div>
+        <h5>Conversion</h5>
+        <p>
+            <sup><input type="number" id="convnumerador" value="2" > </sup> / <sub> <input type="number" id="convdenominador" value="4"> </sub> 
+            = <label id="convExplicacion"></label>
+            
+        </p>
+        <button onclick="convertirdecimal()">A decimal</button>
+    </div>
+
+    <!-- Simplificacion -->
+    <div>
+        <h5>Simplificacion</h5>
+        <p>
+            <sup><input type="number" id="simnumerador" value="40" > </sup> / <sub> <input type="number" id="simdenominador" value="80"> </sub> 
+            = <label id="simExplicacion"></label><sup><label type="number" id=
+                "rsimnumerador" ></sup>/<sub><label type="number" id="rsimdenominador"></sub>
+            
+        </p>
+        
+        <button onclick="EuclidesMCD()">Simplificar</button>
+
+    </div>
+    <!-- Amplificacion -->
+    <div>
+        <h5>Amplificacion</h5>
+        <p>
+            <sup><input type="number" id="ampnumerador" value="1" > </sup> / <sub> <input type="number" id="ampdenominador" value="4"> </sub> Indica el numero por el que se amplificara la fraccion <input type="number" id="amp" value="2">
+        </p>
+        <p>
+            <label id="rampExplicacion"></label>
+        </p>
+        <button onclick="Amplificar()">Amplificar</button>        
+    </div>
     <!-- Representacion de fracciones -->
     <div>
-        <h5>Fraccion</h5>
+        <h5>Representacion de fracciones</h5>
         <p>
         El denominador(abajo) nos dice en cuantas partes iguales se divide algo, y el numerador (arriba) cuantas partes vamos a tomar
         </p>
@@ -64,9 +116,18 @@
         <!-- <input type="button" onclick="sumar()" value="SUMAR"> -->
         <button onclick="representar()">Hacer fraccion mixta</button>
         <!-- <button id="sumar">Resultado</button> -->
+        <!-- <div style="float:left;margin-right:50px;"> -->
+            <canvas id="canvas1"></canvas>
+            <!-- <div id="leyenda1" class="leyenda"></div> -->
+        <!-- </div> -->
+         
+        <!-- <div style="float:left;"> -->
+            <!-- <canvas id="canvas2"></canvas> -->
+            <!-- <div id="leyenda2" class="leyenda leyendaH"></div> -->
+        <!-- </div> -->
     </div>
     <div>
-        <h5>Fraccion mixta</h5>
+        <h5>Fracciones mixta</h5>
         <p>
         La fraccion mixta es aquella que tiene parte en fracción y parte entera
         </p>
@@ -79,16 +140,8 @@
         <!-- <button id="sumar">Resultado</button> -->
     </div>
 
-    <div style="float:left;margin-right:50px;">
-        <canvas id="canvas1"></canvas>
-        <div id="leyenda1" class="leyenda"></div>
-    </div>
-     
-    <div style="float:left;">
-        <canvas id="canvas2"></canvas>
-        <div id="leyenda2" class="leyenda leyendaH"></div>
-    </div>
-     
+
+
     
     <!-- <canvas id="myCanvas"></canvas> -->
     <script src="./js/fracciones.js"></script>
