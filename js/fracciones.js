@@ -9,23 +9,47 @@ function sumar(){
     let resresNumerador=0
     let resultadoNumerador1=0
     let resultadoDenominador=0
+    let explicacion=""
 
     if(denominador1==denominador2){
         resresNumerador=parseInt(numerador1)  + parseInt(numerador2)
         resultadoDenominador=denominador2
+        explicacionnumerador=numerador1+' + '+numerador2;
+        explicaciondenominador=' '+denominador1+' '
+        desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+        desarrollointer=""
+        desarrollofinal="<sup><label>"+resresNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+        explicacion="<h4>Pasos</h4>1-Se suman directamente porque tienen un denominador en comun, es decir, tienen el mismo numero en el denominador"
     }
     else{
         resultadoNumerador1=numerador1 * denominador2
         resultadoNumerador2=numerador2 * denominador1
         resultadoDenominador=denominador1*denominador2
         resresNumerador=resultadoNumerador1 + resultadoNumerador2
+        explicacionnumerador='('+numerador1+')('+denominador2+') + ('+numerador2+')('+denominador1+')';
+        explicaciondenominador='('+denominador1+')('+denominador2+')'
+        desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+        desarrollointer="<sup><label>"+resultadoNumerador1+" + "+resultadoNumerador2+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollofinal="<sup><label>"+resresNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollointegrada=desarrollo+" = "+desarrollointer+" = "+desarrollofinal
+        explicacion="<h4>Pasos</h4>1-Se tuvo que buscar un denominador en comun multiplicando entre denominadores <br> 2- Multiplicar numerador del primer termino por el denominador del segundo termino <br> 3-Multiplicar numerador del segundo termino por el denominador del primero <br> 5- El resultado de cada una de esas multiplicaciones se suman y ese es tu numerador al sumar los dos terminos resultantes de la multiplicacion"
     }
-
+    
     console.log("Imprimiendo suma",resultadoDenominador, resresNumerador)
     // document.querySelector('#label').innerText = 'Tu Valor';
     document.getElementById('resultadonumerador').innerHTML=resresNumerador;
     document.getElementById('resultadodenominador').innerHTML=resultadoDenominador;
+    document.getElementById('desarrollo').innerHTML=desarrollointegrada+"<br>"+explicacion
+    // document.getElementById('resultadodenominadorexplicacion').innerHTML=resultadoDenominador;
 
+    // const data = document.getElementById("Explicacion");
+    // data.innerHTML = "";
+    // data.innerHTML="<h1>Tema 2</h1>";
+
+    // data.textContent;   // "Tema 1"
+    // data.innerHTML;     // "<h1>Tema 1</h1>"
+    // data.outerHTML;     // "<div class="data"><h1>Tema 1</h1></div>"
 
     return resresNumerador, resultadoDenominador 
 }
@@ -43,17 +67,33 @@ function restar(){
     if(denominador1==denominador2){
         resresNumerador=parseInt(numerador1)  - parseInt(numerador2)
         resultadoDenominador=denominador2
+        explicacionnumerador=numerador1+' - '+numerador2;
+        explicaciondenominador=' '+denominador1+' '
+        desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+        desarrollointer=""
+        desarrollofinal="<sup><label>"+resresNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+        explicacion="<h4>Pasos</h4>1-Se resta directamente porque tienen un denominador en comun, es decir, tienen el mismo numero en el denominador"
     }
     else{
         resultadoNumerador1=numerador1 * denominador2
         resultadoNumerador2=numerador2 * denominador1
         resultadoDenominador=denominador1*denominador2
         resresNumerador=resultadoNumerador1 - resultadoNumerador2
+        explicacionnumerador='('+numerador1+')('+denominador2+') - ('+numerador2+')('+denominador1+')';
+        explicaciondenominador='('+denominador1+')('+denominador2+')'
+        desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+        desarrollointer="<sup><label>"+resultadoNumerador1+" - "+resultadoNumerador2+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollofinal="<sup><label>"+resresNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+        desarrollointegrada=desarrollo+" = "+desarrollointer+" = "+desarrollofinal
+        explicacion="<h4>Pasos</h4>1-Se tuvo que buscar un denominador en comun multiplicando entre denominadores <br> 2- Multiplicar numerador del primer termino por el denominador del segundo termino <br> 3-Multiplicar numerador del segundo termino por el denominador del primero <br> 5- El resultado de cada una de esas multiplicaciones se restan y ese es tu numerador al sumar los dos terminos resultantes de la multiplicacion"
     }
     console.log("Imprimiendo resta",resultadoDenominador, resresNumerador)
     // document.querySelector('#label').innerText = 'Tu Valor';
     document.getElementById('rresultadonumerador').innerHTML=resresNumerador;
     document.getElementById('rresultadodenominador').innerHTML=resultadoDenominador;
+    document.getElementById('rdesarrollo').innerHTML=desarrollointegrada+"<br>"+explicacion
+
 
     return resresNumerador, resultadoDenominador 
 }
@@ -68,10 +108,20 @@ function multiplicar(){
     let resultadoDenominador=0
     resultadoNumerador=numerador1 * numerador2
     resultadoDenominador=denominador1 * denominador2
+    explicacionnumerador='('+numerador1+')*('+numerador2+')';
+    explicaciondenominador='('+denominador1+')('+denominador2+')'
+    desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+    desarrollointer=""
+    desarrollofinal="<sup><label>"+resultadoNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+    desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+    explicacion="<h4>Pasos</h4>1- Multiplicar directamente numerador del primer termino por el numerador del segundo <br>2- Multiplicar el denominador del primer termino por el denominador del segundo"
+
 
     console.log("Imprimiendo multiplicacion",resultadoDenominador, resultadoNumerador)
     document.getElementById('mresultadonumerador').innerHTML=resultadoNumerador;
     document.getElementById('mresultadodenominador').innerHTML=resultadoDenominador;
+    document.getElementById('mdesarrollo').innerHTML=desarrollointegrada+"<br>"+explicacion
+
 
 }
 
@@ -85,10 +135,20 @@ function dividir(){
     let resultadoDenominador=0
     resultadoNumerador=numerador1 * denominador2
     resultadoDenominador=numerador2 * denominador1
+    explicacionnumerador='('+numerador1+')*('+denominador2+')';
+    explicaciondenominador='('+numerador2+')('+denominador1+')'
+    desarrollo="<sup>"+explicacionnumerador+"</sup>/<sub>"+explicaciondenominador+"</sub>"
+    desarrollointer=""
+    desarrollofinal="<sup><label>"+resultadoNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
+    desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+    explicacion="<h4>Pasos</h4>1- Multiplicar directamente numerador del primer termino por el denominador del segundo y se deja en numerador <br>2- Multiplicar el denominador del primer termino por el numerador del segundo termino y se deja en el denominador"
+
 
     console.log("Imprimiendo division",resultadoDenominador, resultadoNumerador)
     document.getElementById('dresultadonumerador').innerHTML=resultadoNumerador;
     document.getElementById('dresultadodenominador').innerHTML=resultadoDenominador;
+    document.getElementById('ddesarrollo').innerHTML=desarrollointegrada+"<br>"+explicacion
+
 }
 
 
@@ -116,23 +176,31 @@ function representar(){
     let numerador=parseInt(document.getElementById("reprenumerador").value)
     let denominador=parseInt(document.getElementById("repredenominador").value)
     if (denominador<=numerador){
+        // dibujarPastel()
         res=numerador/denominador
-        document.getElementById("repreEntero").innerHTML=Math.floor(res)
-        document.getElementById("rreprenumerador").innerHTML=numerador-(Math.floor(res)*denominador)
+        
+        // resdesarrollo='<label id="repreEntero"></label><sup><label type="number" id="rreprenumerador" ></sup> / <sub><label type="number" id="rrepredenominador"></sub>'
+        enteros=Math.floor(res)
+        document.getElementById("repreEntero").innerHTML=enteros
+        numeradorres=numerador-(Math.floor(res)*denominador)
+        document.getElementById("rreprenumerador").innerHTML=numeradorres
         document.getElementById("rrepredenominador").innerHTML=denominador
-        document.getElementById("repreExplicacion").innerHTML="El numero entero se representa del lado izquierdo"
+        document.getElementById("repreExplicacion").innerHTML="La fraccion dada en decimal son "+res+", quedando la fraccion de la siguiente forma"
         console.log("El numerador es mayor", Math.trunc(res))
-    }else{
-        dibujarPastel()
+        dibujarPastel(numeradorres,denominador)
 
+    }else{
+        document.getElementById("repreEntero").innerHTML=""
         document.getElementById("rreprenumerador").innerHTML=parseInt(numerador)
         document.getElementById("rrepredenominador").innerHTML=parseInt(denominador)
-        document.getElementById("repreExplicacion").innerHTML="Numerador menor que el denominador"
+        document.getElementById("repreExplicacion").innerHTML="Numerador es el color rojo "+numerador+" y el complemento o sobrante para hacer "+denominador+" es el azul"
         console.log("El denominador es mayor que el numerador")
+        dibujarPastel(numerador,denominador)
+
     }
 
 }
-function dibujarPastel(){
+function dibujarPastel(numerador, denominador){
     /**
      * Clase para generar graficos de pastel
      * Tiene que recibir:
@@ -294,8 +362,11 @@ function dibujarPastel(){
     //     ".NET":{valor:12,color:"Orange"},
     //     "C++":{valor:30,color:"Cyan"}
     // }
-    let x=document.getElementById("reprenumerador").value
-    let y=document.getElementById("repredenominador").value
+
+    // let x=document.getElementById("reprenumerador").value
+    // let y=document.getElementById("repredenominador").value
+    let x=numerador
+    let y=denominador
     let sobrante=1-x/y
     let fraccion=x/y
     console.log("sobrante",sobrante,"fraccion",fraccion, x, y)
@@ -327,8 +398,13 @@ function dibujarPastel(){
 
          resnumerador=(parseInt(entero)*parseInt(denominador))+parseInt(numerador)
          resdenominador=denominador
+         desarrollo= '<sup><label>'+numerador+'+('+entero+')('+denominador+') </label></sup> / <sub><label>('+denominador+')('+entero+')</label> </sub>'
+         explicacion='<h4>Pasos</h4>1-Se multiplica denominador '+denominador+' por el numero entero '+entero+' y se suma con el valor del numerador '+numerador+' el resultado se deja en el numerador<br>2-En el denominador se conserva el valor que manejaba anteriormente '+denominador
+        desarrollofinal='<sup><label>'+resnumerador+' </label></sup> / <sub><label>'+denominador+'</label> </sub>'
+         // desarrollo='Hola a todos'
          document.getElementById("rmixtonumerador").innerHTML=resnumerador
          document.getElementById("rmixtodenominador").innerHTML=resdenominador
+         document.getElementById("mixDesarrollo").innerHTML='='+desarrollo+'='+desarrollofinal+explicacion
      }
 
      function comparar(){
@@ -344,23 +420,46 @@ function dibujarPastel(){
 
             case '>':
                 if(ter1>ter2){
-                    document.getElementById("compExplicacion").innerHTML="Es correcto"
+                    mensaje="Es correcto"
                 }else if(ter1==ter2){
-                    document.getElementById("compExplicacion").innerHTML="Las fracciones equivalen lo mismo"
+                    mensaje="Las fracciones equivalen lo mismo"
                 }else{
-                    document.getElementById("compExplicacion").innerHTML="La comparacion es incorrecta"
+                    mensaje="La comparacion es incorrecta"
                 }
-                console.log("Entro en el case")
+                explicacionnumerador='('+numerador1+')('+denominador2+')'+comparacion+' ('+numerador2+')('+denominador1+')';
+                // explicaciondenominador='('+denominador1+')('+denominador2+')'
+                desarrollo="("+ter1+")"+comparacion+"("+ter2+")"
+                desarrollointer=""
+                desarrollofinal=""
+                desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+                explicacion="<h4>Pasos</h4>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino <br>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino<br>3- Se hace una comparacion entre los terminos y se observa que se cumpla la condicion"
+ 
+                document.getElementById("compExplicacion").innerHTML=mensaje
+                document.getElementById("compdesarrollo").innerHTML=explicacionnumerador+"="+desarrollo+"="+mensaje+explicacion+"="+mensaje
+                
+                // document.getElementById("comdesarrollo").innerHTML=desarrollo
+
+                // console.log("Entro en el case")
                 break;
             case '<':
                 if(ter1<ter2){
-                    document.getElementById("compExplicacion").innerHTML="Es correcto"
+                    mensaje="Es correcto"
                 }else if(ter1==ter2){
-                    document.getElementById("compExplicacion").innerHTML="Las fracciones equivalen lo mismo"
+                    mensaje="Las fracciones equivalen lo mismo"
                 }else{
-                    document.getElementById("compExplicacion").innerHTML="La comparacion es incorrecta"
+                    mensaje="La comparacion es incorrecta"
                 }
-                console.log("Entro en el case")
+                explicacionnumerador='('+numerador1+')('+denominador2+')'+comparacion+' ('+numerador2+')('+denominador1+')';
+                // explicaciondenominador='('+denominador1+')('+denominador2+')'
+                desarrollo="("+ter1+")"+comparacion+"("+ter2+")"
+                desarrollointer=""
+                desarrollofinal=""
+                desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+                explicacion="<h4>Pasos</h4>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino <br>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino<br>3- Se hace una comparacion entre los terminos y se observa que se cumpla la condicion"
+ 
+                document.getElementById("compExplicacion").innerHTML=mensaje
+                document.getElementById("compdesarrollo").innerHTML=explicacionnumerador+"="+desarrollo+"="+mensaje+explicacion
+                
                 break;
             case '=':
                 if(ter1==ter2){
@@ -427,7 +526,12 @@ function dibujarPastel(){
          let numerador=parseInt(document.getElementById("ampnumerador").value)
          let denominador=parseInt(document.getElementById("ampdenominador").value)
 
-         document.getElementById("rampExplicacion").innerHTML='<sup><label type="number" id="ampnumerador" >'+numerador*amplificador+'</label></sup> / <sub> <label type="number" id="ampdenominador">'+denominador*amplificador+'</label> </sub>'
-
+        // explicaciondenominador='('+denominador1+')('+denominador2+')'
+        desarrollo='<sup><label type="number" id="ampnumerador" >('+numerador+")("+amplificador+')</label></sup> / <sub> <label type="number" id="ampdenominador">('+denominador+')('+amplificador+')</label> </sub>'
+        // desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
+         explicacion="<h4>Pasos</h4>1- Seleccionar el numero por que quieres amplificar tu fraccion <br>2- Multiplicar el amplificador por el numerador <br>3- Multiplicar el amplificador por el numerador "
+         desarrollofinal='<sup><label type="number" id="ampnumerador" >'+numerador*amplificador+'</label></sup> / <sub> <label type="number" id="ampdenominador">'+denominador*amplificador+'</label> </sub>'
+         document.getElementById("rampExplicacion").innerHTML="="+desarrollo+"="+desarrollofinal+explicacion
+        
      }
       
