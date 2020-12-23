@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12 text-center">
+    <h3>Jerarquia de operaciones</h3>
+        
+    </div>
+    <link rel="stylesheet" type="text/css" href="../css/pruebas.css">
+    <!-- <div id="jerarquia de operaciones"> -->
+        <p>
+            Para realizar operaciones matemáticas correctamente se tiene que respetar una jerarquía que se muestra a continuación
+            <ol>
+                <li>Paréntesis(signos de agrupación) "(), {}, []"<button onclick="parentesis()" id="parentesis">Ejemplo</button></li>
+                <li>Potencias y raíces "^,()^, √" <button onclick="potencias()">Ejemplo</button></li>
+                <li>Multiplicaciones y divisiones "*,/"<button onclick="multiplicaciones()">Ejemplo</button></li>
+                <li>Sumas y restas "+,-"<button onclick="sumas()">Ejemplo</button></li>
+            </ol>
+            Nota: En caso de encontrar operaciones de la misma jerarquía se van a realizar primero las que están de izquierda a derecha
+        </p>
+        <div id="jerarquia">
+
+        </div>
+        <script src="../js/Jerarquia.js"></script>
+    <!-- </div>     -->
+</div>
