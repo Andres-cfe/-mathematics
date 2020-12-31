@@ -263,3 +263,18 @@ section #services li div:hover {
    display: flex;
    justify-content: flex-end;
 }
+
+.casilla-div{
+  border-top:solid 2px red;
+  border-left: solid 2px red;
+}
+.residuos .btn{
+    padding: 0.5rem 6px;
+    font-size: 15px;
+}
+.restardiv{
+  margin-left: 1.5px;
+}
+.menosdiv{
+  margin-left: -9px;
+}

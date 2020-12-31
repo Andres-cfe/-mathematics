@@ -1,5 +1,673 @@
-// Pagina de operaciones
+jQuery(document).ready(function($){
 
+
+    //-----------------------------------------------------
+    //--------  DETERMINAR TIPO DE OPERACION  -------------
+    //-----------------------------------------------------
+    $(".btn-operacion").click(function(){
+        $('.dashboard').hide(300);
+        $('.descripcion').show(300);
+        var tipo = $(this).attr('data');
+         var res = tipo.split('-');
+        switch(tipo) {
+          case 'Interactivo':
+            $('.Interactivo').show(300);
+            //titulo
+            $('.descripcion .title').html('➤ Interactivo');
+            break;
+          case 'comparacion':
+            $('.comparacion').show(300);
+            $('.descripcion .title').html('➤ Comparación');
+            break;
+          case 'conversion':
+            $('.conversion').show(300);
+            $('.descripcion .title').html('➤ Conversión');
+            break;
+          case 'equivalencia':
+            $('.equivalencia').show(300);
+            $('.descripcion .title').html('➤ Equivalencia');
+            break;
+          case 'simplificacion':
+            $('.simplificacion').show(300);
+            $('.descripcion .title').html('➤ Simplificación');
+            break;
+          case 'amplificacion':
+            $('.amplificacion').show(300);
+            $('.descripcion .title').html('➤ Amplificación');
+            break;
+          default:
+            // code block
+        }        
+
+    });
+
+
+    //-----------------------------------------------------
+    //--------  BOTON REGRESAR A MENU ANTERIOR  -------------
+    //-----------------------------------------------------
+    $("#btn-regresar").click(function(){
+
+        $('.numero').each(function(){
+            if($(this).hasClass('border-danger')){
+                $(this).removeClass('border border-danger');
+                $(this).next().remove();
+            }
+        });
+
+        $('.dashboard').show(300);
+        $('.descripcion').hide(300);
+        $('.Interactivo').hide(300);
+        $('.comparacion').hide(300);
+        $('.conversion').hide(300);
+        $('.equivalencia').hide(300);
+        $('.simplificacion').hide(300);
+        $('.amplificacion').hide(300);
+        $('.figura').hide(300);
+        $('.desarrollo').hide(300);
+        $('.desarrollo-mixta').hide(300);
+        $('.desarrollo-comparacion').hide(300);
+        $('.desarrollo-conversion').hide(300);
+        $('.desarrollo-equivalencia').hide(300);
+        $('.desarrollo-simplificacion').hide(300);
+        $('.desarrollo-amplificacion').hide(300);
+        $('.instrucciones').hide(300);
+        $( ".numero" ).each(function() {
+            $(this).val('');
+        });
+        $('#resultado').val('');
+    });
+
+    //-----------------------------------------------------
+    //------------  VALIDAR SOLO ENTEROS ------------------
+    //-----------------------------------------------------
+    $(".numero").keyup(function(){
+      $(this).css("background-color", "pink");
+      $(this).val(parseInt($(this).val()));
+    });
+
+    $(".numero").focusout(function(){
+        $(this).css("background-color", "white");
+    });
+
+    $(".mixta .numero").focus(function(){
+        //$('.propias-impropias .numero').val('');
+        //$('.desarrollo').hide(300);
+    });
+
+
+    //-----------------------------------------------------
+    //--------------  FUNCIONES DE FRACIONES --------------
+    //-----------------------------------------------------
+    $(".paint").click(function(){
+        $('.desarrollo .alert-danger').remove();
+        $('.desarrollo-mixta .alert-danger').remove();
+        var tipo = $(this).attr('data');
+        var padre = $(this).closest('form').attr('id');
+
+        Validate(padre);
+
+        switch(tipo) {
+          case 'mixta':
+
+            if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-mixta').hide(300);
+            }else{
+                $('.desarrollo-mixta').show(300);
+                    $('html, body').animate({
+                        scrollTop: $(".desarrollo-mixta").offset().top
+                    }, 2000);
+                if (parseInt($('#numerador-mixta').val()) > parseInt($('#denominador-mixta').val())) {
+                    $('.subdesarrollo').show(300);
+                    $('.explicacion-mixta').html('<b>Cociente con fracción impropia</b>');
+                    calcular_mixta($('#cociente').val(),$('#numerador-mixta').val(),$('#denominador-mixta').val());
+                }else{
+                    $('.subdesarrollo').hide(300);
+                    $('.explicacion-mixta').html('<b>Cociente con fracción propia</b>');
+                    fraccion_mixta('propia',$('#cociente').val(),$('#numerador-mixta').val(),$('#denominador-mixta').val());
+                }
+            }
+
+            break;
+          case 'propia':
+            if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo').hide();
+            }else{
+                $('.desarrollo').show(300);
+                    $('html, body').animate({
+                        scrollTop: $(".desarrollo").offset().top
+                    }, 2000);
+                if (parseInt($('#numerador').val()) > parseInt($('#denominador').val())) {
+                    $('.inpropias').show(300);
+                    $('.propias').hide(300);
+                    $('.Interactivo .explicacion').html('<b>Es una fracción impropia</b>');
+                    fracioninpropia($('#numerador').val(),$('#denominador').val());
+                }else{
+                    $('.propias').show(300);
+                    $('.inpropias').hide(300);
+                    $('.Interactivo .explicacion').html('<b>Es una fracción propia</b>');
+                    fraccionpropia($('#numerador').val(),$('#denominador').val());
+                }
+            }
+            break;
+          case 'comparacion':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-comparacion').hide();
+              }else{
+                $('.desarrollo-comparacion').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-comparacion").offset().top
+                }, 2000);
+                comparacion();
+              }
+            break;
+          case 'conversion':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-conversion').hide();
+              }else{
+                $('.desarrollo-conversion').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-conversion").offset().top
+                }, 2000);
+                conversion();
+              }
+            break;
+          case 'equivalencia':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-equivalencia').hide();
+              }else{
+                $('.desarrollo-equivalencia').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-equivalencia").offset().top
+                }, 2000);
+                equivalencia();
+              }
+            break;
+          case 'simplificacion':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-simplificacion').hide();
+              }else{
+                $('.desarrollo-simplificacion').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-simplificacion").offset().top
+                }, 2000);
+                simplificacion();
+              }
+            break;
+          case 'amplificacion':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-amplificacion').hide();
+              }else{
+                $('.desarrollo-amplificacion').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-amplificacion").offset().top
+                }, 2000);
+                amplificacion();
+              }
+            break;
+        }
+    });
+
+
+    //-----------------------------------------------------
+    //---  FUNCIONES DE FRACIONES PROPIAS E IMPROPIAS  ----
+    //-----------------------------------------------------
+    function fraccionpropia(numerador,denominador)
+    {
+        $('.btn-numerador').html(numerador+' <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador');
+        $('.btn-denominador').html(denominador+' <i class="fas fa-arrow-left ml-2 mr-2"></i> Denominador');
+
+        $('.desarrollo canvas').clearCanvas();
+        var medida = (360/denominador);
+
+        var anguloinicio = 0;
+        var angulofin = 0;
+        for (var i = 1; i <= denominador; i++) {
+            angulofin = angulofin+medida;
+            if (numerador >= i) {
+                color = '#c33';
+                nombre = 'numerador'+i;
+            }else{
+                color = '#36c';
+                nombre = 'denominador'+i;
+            }
+            $('.desarrollo canvas')
+            .drawSlice({
+              layer: false,
+              name: nombre,
+              groups: ['chart', 'labels'],
+              fillStyle: color,
+              x: 180, y: 110,
+              start: 0+anguloinicio, end: 0+angulofin,
+              radius: 100,
+              spread: 1 / 60
+            });
+            anguloinicio = angulofin;
+
+        }
+    }
+
+    function fracioninpropia(numerador,denominador){
+
+        var residuo = (numerador%denominador);
+        var cociente = (numerador/denominador);
+
+        $('.operacion').html(numerador+' / '+denominador+'= <b>'+parseInt(cociente)+'</b>, residuo <b>'+residuo+'</b>');
+        $('.inpropias .cociente').html(parseInt(cociente));
+        $('.inpropias .residuo').html(parseInt(residuo));
+        $('.inpropias .denominador').html(parseInt(denominador));
+        fraccion_mixta('impropia-fig',cociente,residuo,denominador);
+        if (residuo > 0) {
+            $('.desarrollo .resultado-residuo').show();
+            $('.desarrollo .resultado-denominador').show();
+        }else{
+            $('.desarrollo .resultado-residuo').hide();
+            $('.desarrollo .resultado-denominador').hide();
+        }
+    }
+
+    //-----------------------------------------------------
+    //----------  FUNCIONES DE FRACIONES MIXTA  -----------
+    //-----------------------------------------------------
+    function calcular_mixta(cociente,numerador,denominador){
+        var residuo = (numerador%denominador);
+        var cociente1 = (numerador/denominador);
+
+        cociente1 = parseInt(cociente1)+parseInt(cociente);
+
+        fraccion_mixta('propia',cociente1,residuo,denominador);
+
+        $('.subdesarrollo').html('<p><b>El resultado es:</b></p>'+'<div class="row">'+
+                        '<h5 class="col-lg-3 col-md-3 col-3 mt-3">'+
+                            'cociente <i class="fas fa-arrow-right ml-2"></i>'+
+                        '</h5>'+
+                        '<h3 class="cociente col-lg-1 col-md-1 col-1 pt-3" style="border: solid 2px blue;">'+cociente1+
+                        '</h3>'+
+                        '<h6 class="resultado-residuo col-lg-8 col-md-8 col-6">'+
+                            '<div class="col-lg-12 col-md-12 col-12 row">'+
+                               '<h5 class="residuo mr-3" style="border: solid 2px orange;">'+residuo+'</h5>    <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador '+
+                            '</div>'+
+                            '<hr class="col-lg-2 col-md-2 col-2 float-left" style="background-color: red;"><hr class="col-lg-10 col-md-10 col-10 border border-white">'+
+                            '<div class="resultado-denominador col-lg-12 col-md-12 col-12 row">'+
+                               '<h5 class="denominador  mr-3" style="border: solid 2px purple;">'+denominador+'</h5>      <i class="fas fa-arrow-left ml-2 mr-2"></i> Divisor y denominador original'+
+                            '</div>'+
+                        '</h6>'+
+                    '</div>');
+
+        if (residuo > 0) {
+            $('.desarrollo-mixta .resultado-residuo').show();
+            $('.desarrollo-mixta .resultado-denominador').show();
+        }else{
+            $('.desarrollo-mixta .resultado-residuo').hide();
+            $('.desarrollo-mixta .resultado-denominador').hide();
+        }
+
+    }
+
+
+    function fraccion_mixta(container,cociente,numerador,denominador){
+        
+        $('.'+container).html('<div class="enteros col-lg-6 col-md-6 col-6 row">'+
+                  '</div>'+
+                  '<div class="col-lg-6 col-md-6 col-6">'+
+                      '<canvas width="250" height="250" width="300" height="300" style="width: 200px; height:200px; margin: 0px auto; "></canvas>'+
+                  '</div>');
+
+
+        for (var i = 1; i <= cociente; i++) {
+            $('.'+container+' .enteros').append('<div class="circulo  ml-2" style="width: 40px; height: 40px; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; background: #5cb85c;"></div>');
+        }
+
+        $('.'+container+' canvas').clearCanvas();
+        var medida = (360/denominador);
+
+        var anguloinicio = 0;
+        var angulofin = 0;
+
+        if(cociente > 0  && numerador == 0 || denominador == 0){
+
+        }else{
+            for (var i = 1; i <= denominador; i++) {
+                angulofin = angulofin+medida;
+                if (numerador >= i) {
+                    color = '#c33';
+                    nombre = 'numerador'+i;
+                }else{
+                    color = '#36c';
+                    nombre = 'denominador'+i;
+                }
+                $('.'+container+' canvas')
+                .drawSlice({
+                  layer: false,
+                  name: nombre,
+                  groups: ['chart', 'labels'],
+                  fillStyle: color,
+                  x: 180, y: 110,
+                  start: 0+anguloinicio, end: 0+angulofin,
+                  radius: 60,
+                  spread: 1 / 60
+                });
+                anguloinicio = angulofin;
+
+            }
+        }
+
+
+    }
+
+
+    //-----------------------------------------------------
+    //-------------  FUNCIONES DE COMPARACIÓN  ------------
+    //-----------------------------------------------------
+    function comparacion(){
+        numerador1=$("#compnumerador1").val();
+        numerador2=$("#compnumerador2").val();
+        denominador1=$("#compdenominador1").val();
+        denominador2=$("#compdenominador2").val();
+        simbolo = $("#comp").val();
+        ter1=numerador1*denominador2;
+        ter2=numerador2*denominador1;
+        var resultado;
+        $('.resultado-comparacion').removeClass('text-danger');
+         switch(simbolo){
+            case '>':
+                if(ter1>ter2){
+                    resultado='La primera fracción es mayor que la segunda';
+                }else if(ter1==ter2){
+                    resultado='Las fracciones equivalen lo mismo';
+                }else{
+                    resultado='La segunda fracción es mayor que la primera';
+                    $('.resultado-comparacion').addClass('text-danger');
+                }
+                break;
+            case '<':
+                if(ter1<ter2){
+                    resultado='Es correcto';
+                }else if(ter1==ter2){
+                    resultado='Las fracciones equivalen lo mismo';
+                }else{
+                    resultado='La primera fración es mayor que la segunda';
+                    $('.resultado-comparacion').addClass('text-danger');
+                }
+                break;
+            case '=':
+                if(ter1==ter2){
+                    resultado = '';
+                    resultado='Son equivalentes';
+                }else{
+                    resultado = '';
+                    resultado='No son equivalentes '+ter1+' y '+ter2;
+
+                }
+                break;
+        }
+        $('.num1').html(numerador1);
+        $('.num2').html(numerador2);
+        $('.den1').html(denominador1);
+        $('.den2').html(denominador2);
+        $('.desarrollo-comparacion .explicacion').html('<p><b>Explicación:</b></p><p>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino. </p>'+
+                                                        '<p><i>'+numerador1+' * '+denominador2+'= <b>'+ter1+'</b></i></p>'+
+                                                        '<p>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino</p>'+
+                                                        '<p><i>'+denominador2+' * '+numerador1+'= <b>'+ter2+'</b></i></p>'+
+                                                        '<p>3- Se hace una comparacion entre los terminos y se observa que se cumpla la condicion</p>'+
+                                                        '<p><b>'+ter1+' '+simbolo+' '+ter2+'</b></p>');
+        $('.resultado-comparacion').html('<b>'+resultado+'</b>');
+    }
+
+
+    //-----------------------------------------------------
+    //-------------  FUNCIONES DE CONVERSIÓN  -------------
+    //-----------------------------------------------------
+    function conversion(){
+        var entero=$("#entero").val();
+        var numerador=$("#mixtonumerador").val();
+        var denominador=$("#mixtodenominador").val();
+
+        resnumerador=((entero*denominador)+parseInt(numerador));
+
+
+
+       $('.resultado-conversion').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resnumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+denominador+'</div>'); 
+
+       $('.desarrollo-conversion .explicacion').html('<p><b>Explicación:</b></p><p>1- Se multiplica el denominador  de la fracción (<b>'+denominador+'</b>) por el numero entero (<b>'+entero+'</b>) y se suma con el valor del numerador (<b>'+numerador+'</b>) el resultado se deja en el numerador.</p>'+
+        '<p>('+denominador+' * '+entero+')+'+numerador+' = <b>'+resnumerador+'</b></p>'+
+        '<p>2- En el denominador se conserva el valor que manejaba anteriormente (<b>'+denominador+'</b>)</p>'
+        );
+
+    }
+
+
+    //-----------------------------------------------------
+    //------------  FUNCIONES DE EQUIVALENCIA  ------------
+    //-----------------------------------------------------
+    function equivalencia(){
+        var numerador1 = parseInt($('#numerador1').val());
+        var numerador2 = parseInt($('#numerador2').val());
+        var denominador1 = parseInt($('#denominador1').val());
+        var denominador2 = parseInt($('#denominador2').val());
+
+        var equi1 = (numerador1/denominador1);
+        var equi2 = (numerador2/denominador2);
+
+        if (equi1 == equi2) {
+            resultado = 'Son equivalentes';
+        }else{
+            resultado = 'No son equivalentes';
+        }
+
+        $('.resultado-equivalencia').html('<b>'+resultado+'</b>');
+        $('.numerador1').html(numerador1);
+        $('.numerador2').html(numerador2);
+        $('.denominador1').html(denominador1);
+        $('.denominador2').html(denominador2);
+        $('.decimal1').html(equi1);
+        $('.decimal2').html(equi2);
+
+        if (numerador1 >= denominador1) {
+                var residuo = (numerador1%denominador1);
+                var cociente = (numerador1/denominador1);
+
+                fraccion_mixta('fig_equivalencia1',cociente,residuo,denominador1);
+
+        }else{
+            Draw('fig_equivalencia1',numerador1,denominador1);
+        }
+        
+        if (numerador2 >= denominador2) {
+                var residuo = (numerador2%denominador2);
+                var cociente = (numerador2/denominador2);
+
+                fraccion_mixta('fig_equivalencia2',cociente,residuo,denominador2);
+        }else{
+            Draw('fig_equivalencia2',numerador2,denominador2);    
+        }
+        
+    }
+
+
+    //-----------------------------------------------------
+    //-----------  FUNCIONES DE SIMPLIFICACIÓN ------------
+    //-----------------------------------------------------
+    function simplificacion(){
+        a=$("#simplnumerador").val();
+        b=$("#simpldenominador").val();
+        var iaux; //auxiliar
+        a = Math.abs(a); //tomamos valor absoluto
+        b = Math.abs(b);
+        var i1 = Math.max(a, b); //i1 = el más grande
+        var i2 = Math.min(a, b); //i2 = el más pequeño
+
+        do {
+            iaux = i2; //guardar divisor
+            i2 = i1 % i2; //resto pasa a divisor
+            i1 = iaux; //divisor pasa a dividendo
+        } while (i2 !== 0);
+
+        rnumerador=a/parseInt(i1);
+        rdenominador=b/parseInt(i1);
+
+        $('.resultado-simplificacion').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+rnumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+rdenominador+'</div>'); 
+        $('.maximodivisor').html(i1);
+        $('.simnumerador').html(a);
+        $('.simdenominador').html(b);
+        $('.newnumerador').html(rnumerador);
+        $('.newdenominador').html(rdenominador);
+        Draw('antfraccion',a,b);
+        Draw('newfraccion',rnumerador,rdenominador);
+        return i1; //ultimo resto no nulo
+    }
+
+
+    //-----------------------------------------------------
+    //-----------  FUNCIONES DE SIMPLIFICACIÓN ------------
+    //-----------------------------------------------------
+    function amplificacion(){
+        amplificador=parseInt($("#amplificador").val());
+        numerador=parseInt($("#amplnumerador").val());
+        denominador=parseInt($("#ampldenominador").val());
+
+        ampnumerador = (numerador*amplificador);
+        ampdenominador = (denominador*amplificador);
+
+
+        $('.resultado-amplificacion').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+ampnumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+ampdenominador+'</div>'); 
+        $('.desarrollo-amplificacion .amplificador').html(amplificador);
+        $('.desarrollo-amplificacion .numerador').html(numerador);
+        $('.desarrollo-amplificacion .denominador').html(denominador);
+        $('.desarrollo-amplificacion .newnumerador').html(ampnumerador);
+        $('.desarrollo-amplificacion .newdenominador').html(ampdenominador);
+        Draw('ampfraccion1',numerador,denominador);
+        Draw('ampfraccion2',ampnumerador,ampdenominador);
+    }
+
+
+    //-----------------------------------------------------
+    //---------------  DIBUJAR FRACCIÓN  ------------------
+    //-----------------------------------------------------
+    function Draw(container,numerador,denominador){
+        
+        $('.'+container).html('<canvas width="300" height="300" style="width: 150px; height:150px; margin: 0px auto; "></canvas>');
+
+        $('.'+container+' canvas').clearCanvas();
+        var medida = (360/denominador);
+
+        var anguloinicio = 0;
+        var angulofin = 0;
+        for (var i = 1; i <= denominador; i++) {
+            angulofin = angulofin+medida;
+            if (numerador >= i) {
+                color = '#c33';
+                nombre = 'numerador'+i;
+            }else{
+                color = '#36c';
+                nombre = 'denominador'+i;
+            }
+            $('.'+container+' canvas')
+            .drawSlice({
+              layer: false,
+              name: nombre,
+              groups: ['chart', 'labels'],
+              fillStyle: color,
+              x: 180, y: 110,
+              start: 0+anguloinicio, end: 0+angulofin,
+              radius: 100,
+              spread: 1 / 60
+            });
+            anguloinicio = angulofin;
+
+        }
+    }
+
+
+
+    //-----------------------------------------------------
+    //-------------  VALIDACIÓN DE CAMPOS  ----------------
+    //-----------------------------------------------------
+    function Validate(padre){
+        var requeridos = 0;
+        var completos = 0;
+        var status;
+        $("#"+padre+" .numero").each(function(){
+            requeridos++;
+            if($(this).val() == '' || $(this).val() <= 0){
+                completos--;
+                if(!$(this).hasClass('border-danger')){
+                    $(this).addClass('border border-danger');
+                    $(this).after('<span class="text-danger"><sup>Valor no valido</sup></span>');
+                }
+            }else{
+                completos++;
+                $(this).removeClass('border border-danger');
+                $(this).next().remove();
+            }
+        });
+
+        if (requeridos == completos) {
+            $('#'+padre).removeClass('Invalidate');
+        }else{
+            $('#'+padre).addClass('Invalidate');
+        }
+    }
+
+    function limpiar(){
+        $('form').each(function(){
+            if ($(this).hasClass('Invalidate')) {
+                $(this).removeClass('Invalidate');
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Pagina de operaciones
 function sumar(){
     let numerador1 = document.getElementById("numerador1").value;
     let denominador1 = document.getElementById("denominador1").value;
@@ -407,78 +1075,6 @@ function dibujarPastel(numerador, denominador){
          document.getElementById("mixDesarrollo").innerHTML='='+desarrollo+'='+desarrollofinal+explicacion
      }
 
-     function comparar(){
-         let numerador1=parseInt(document.getElementById("compnumerador1").value)
-         let numerador2=parseInt(document.getElementById("compnumerador2").value)
-         let denominador1=parseInt(document.getElementById("compdenominador1").value)
-         let denominador2=parseInt(document.getElementById("compdenominador2").value)
-         let comparacion=document.getElementById("comp").value
-         ter1=numerador1*denominador2
-         ter2=numerador2*denominador1
-         
-         switch(comparacion){
-
-            case '>':
-                if(ter1>ter2){
-                    mensaje="Es correcto"
-                }else if(ter1==ter2){
-                    mensaje="Las fracciones equivalen lo mismo"
-                }else{
-                    mensaje="La comparacion es incorrecta"
-                }
-                explicacionnumerador='('+numerador1+')('+denominador2+')'+comparacion+' ('+numerador2+')('+denominador1+')';
-                // explicaciondenominador='('+denominador1+')('+denominador2+')'
-                desarrollo="("+ter1+")"+comparacion+"("+ter2+")"
-                desarrollointer=""
-                desarrollofinal=""
-                desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
-                explicacion="<h4>Pasos</h4>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino <br>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino<br>3- Se hace una comparacion entre los terminos y se observa que se cumpla la condicion"
- 
-                document.getElementById("compExplicacion").innerHTML=mensaje
-                document.getElementById("compdesarrollo").innerHTML=explicacionnumerador+"="+desarrollo+"="+mensaje+explicacion+"="+mensaje
-                
-                // document.getElementById("comdesarrollo").innerHTML=desarrollo
-
-                // console.log("Entro en el case")
-                break;
-            case '<':
-                if(ter1<ter2){
-                    mensaje="Es correcto"
-                }else if(ter1==ter2){
-                    mensaje="Las fracciones equivalen lo mismo"
-                }else{
-                    mensaje="La comparacion es incorrecta"
-                }
-                explicacionnumerador='('+numerador1+')('+denominador2+')'+comparacion+' ('+numerador2+')('+denominador1+')';
-                // explicaciondenominador='('+denominador1+')('+denominador2+')'
-                desarrollo="("+ter1+")"+comparacion+"("+ter2+")"
-                desarrollointer=""
-                desarrollofinal=""
-                desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
-                explicacion="<h4>Pasos</h4>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino <br>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino<br>3- Se hace una comparacion entre los terminos y se observa que se cumpla la condicion"
- 
-                document.getElementById("compExplicacion").innerHTML=mensaje
-                document.getElementById("compdesarrollo").innerHTML=explicacionnumerador+"="+desarrollo+"="+mensaje+explicacion
-                
-                break;
-            case '=':
-                if(ter1==ter2){
-                    document.getElementById("compExplicacion").innerHTML="Es correcto"
-                }else{
-                    document.getElementById("compExplicacion").innerHTML="No son equivalentes "+ter1+" y "+ter2
-
-                }
-                break;
-                
-            default:
-                document.getElementById("compExplicacion").innerHTML="Ingreso un caracter erroneo"
-                console.log("No entro en el caso",ter1,ter2,comparacion)
-
-        }
-
-
-
-     }
 
      function convertirdecimal(){
          let numerador=parseInt(document.getElementById("convnumerador").value)

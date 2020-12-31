@@ -8,6 +8,7 @@ var res = [];
 var newnumonedec = [];
 var numpridec=[];
 var resdec = [];
+var inpri, inmen;
 	//-----------------------------------------------------
 	//--------	DETERMINAR TIPO DE OPERACION  -------------
 	//-----------------------------------------------------
@@ -137,7 +138,7 @@ var resdec = [];
 			$('.desarrollo').show(300);
 			$('.instrucciones').show(300);
 		}
-	
+		console.log("operacion",operacion);
 		switch(operacion) {
 		//--Suma--
 		  case 'suma':
@@ -154,7 +155,8 @@ var resdec = [];
 				$('.flecha').html('&#129044');
 				$('.simbol').html('+');
 			
-		    
+		    $('.operacion-desglosada').show();
+		    $('.o-division').hide();
 		    if(categoria == 'enteros'){
 		      	
 		    	  crear_explicacion(num1,num2,num3,operacion);				  
@@ -247,51 +249,97 @@ var resdec = [];
 			  return total - num;
 			}
 		  //--Obtener valor de input de resultado--
+		    var nummayor=parseInt(num1);
+		  	var nummen= parseInt(num2);
+		  if (nummayor<nummen) {
+		  	nummayor=num2;
+		  	nummen= num1;
+		  	num1=nummayor;
+		  	num2=nummen;
+		  }
 		    var num3=$('#resultado').val();
 
 		  //--Agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--				
 		    $('.simbol').html('-');
 		    $('.flecha').html('&#129044');
-
+		    $('.operacion-desglosada').show();
+		    $('.o-division').hide();
 			if(categoria == 'enteros'){
 
 		    crear_explicacion(num1,num2,num3,operacion);
 
 		   }else{
 		
-		   	$('.ent').addClass('text-right').removeClass('text-left');
-		   	res1 = num1.split(".");
-		    	res2 = num2.split(".");
-		    	res3 = num3.split(".");
-		    	console.log(res3);
-		    	var ent1=res1[0].split("");
-		    	var dec1=res1[1].split("");
-		    	var ent2=res2[0].split("");
-		    	var dec2=res2[1].split("");
-		    	var ent3=res3[0].split("");
-		    	var dec3=res3[1].split("");
-		    	
-		    	$.each(ent1, function(i, val){
-					$('.numone').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
-				$.each(dec1, function(i, val){
-					$('.numdone').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
-		    	$.each(ent2, function(i, val){
-					$('.numtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
-				$.each(dec2, function(i, val){
-					$('.numdtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
-		    	$.each(ent3, function(i, val){
-					$('.numresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
-				$.each(dec3, function(i, val){
-					$('.numdresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
-				});
+		   var dres1 = num1.split(".");
+		    	var dres2 = num2.split(".");
+		    	var inpupri="";
+		    	var inpumen="";
+		    	var newnumdec=[];
+		    	var punto=".";
+		    	var ent1=[];
+		    	var ent2=[];		    	
+		    	var dec1=dres1[1].split("");
+		    	var dec2=dres2[1].split("");
+		    	    ent1=dres1[0].split("");
+		    		ent2=dres2[0].split("");
+		    		
+		    	ent1.push(punto);
+		    	ent2.push(punto);
+		    	console.log(dec1,dec2);
+		    	console.log(ent1,ent2);
+
+		    	if(dec1.length >= dec2.length){
+				    var pridec = dec1;
+				    inpu=1;
+				  }else{
+				    var pridec = dec2;
+				    inpu=2;
+				  }
+
+				  if(dec1.length <= dec2.length){
+				    var mendec = dec1;
+				    inpumen=1;
+				  }else{
+				    var mendec = dec2;
+				    inpumen=2;
+				  }
+
+				  if (dec1.length == dec2.length) {
+				  	var pridec=dec1;
+				  	inpu=1;
+				  	var mendec=dec2;
+				  	inpumen=2;
+				  }
+
+				  for (var dec = 0; dec <= (pridec.length-1); dec++) {
+				      
+				      if (mendec[dec] == undefined) {
+				        newnumdec[dec] = 0;
+				      }else{
+				        newnumdec[dec] = parseInt(mendec[dec]);
+				      }
+				      
+				  }
+				  if(inpu==1){
+				  	var numc1=ent1.concat(pridec);
+				  }else{
+				  	var numc2=ent2.concat(pridec);
+				  }
+
+				  if(inpumen==1){
+				  	var numc1=ent1.concat(newnumdec);
+				  }else{
+				  	var numc2=ent2.concat(newnumdec);
+				  }
+				  	
+				  num1=numc1.join('');
+				  num2=numc2.join('');
+
+				  crear_explicacion(num1,num2,num3,operacion);
+				  console.log(numc2,operacion,"numonedec",pridec,"numtwodec",newnumdec);
 		   }
 		    
-		    extractIntrucciones('resta');
+		    extractIntrucciones(operacion,categoria);
 		    console.log(data) ;
 		    break;
 		//--Multiplicacion--
@@ -314,15 +362,226 @@ var resdec = [];
 			//--agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--
 				$('.simbol').html('X');
 				$('.flecha').html('');
-		    
+		    	$('.operacion-desglosada').show();
+		    	$('.o-division').hide();
 		    	$('.operacion-desglosada').addClass('text-right').removeClass('text-left');
-		    	
-		    	if (categoria=='enteros') {
-		    		crear_explicacion(num1,num2,num3);
-		    	
-		    	}
+		    	crear_explicacion(num1,num2,num3,operacion);
+		    	var multiplicando=num1.split("");
+		    	var multiplicador=num2.split("");
+		    	//var rm=[];
+		    	var valm=[];
+		    	var rsm=[];
+		    	var a=0;
+		    	$('.multiplica').empty();
+		    	$('.resmulti').empty();
+		    	//Realiza multiplicacion por multiplicador
+		    	  for (var m = (multiplicador.length-1); m >= 0; m--) {
+		    	  		if(multiplicador[m]!="."){
+		    	  			valm[a]=multiplicador[m]*num1;
+			    	  		var ures=valm[a].toString().split("");
+			    	  		console.log("ures",ures);
+			    	  		$('.multiplica').append('<div class="row numresul'+a+' ejemplo">');
+			    	  		if(a==0){
+			    	  			
+			    	  			$.each(ures,function(i,val){
+			    	  				if (val!=".") {
+			    	  				$('.numresul'+a).append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');
+			    	  				}
+			    	  			});
+			    	  			
+			    	  		}else{
+			    	  			
+			    	  			$.each(ures,function(i,val){
+			    	  				if (val!=".") {
+			    	  				$('.numresul'+a).append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');
+			    	  				}
+			    	  			});
+			    	  			for(var vu=1; vu<=a;vu++){
+			    	  				$('.numresul'+a).append('<button type="button" class="btn numero mr-1" disabled><b>&nbsp&nbsp</b>');
+			    	  			}
+			    	  			
+			    	  			
+			    	  		}
+			    	  		$('.multiplica').append('</div>');		
+			    	  		if(m==0){
+			    	  			$('.numresul'+a).addClass('linea-res')
+			    	  		}  	  	
+			    	  	
+			    	  	 
+					     a++;
+		    	  		}
+		    	  		
+				  }
+				  var dar=0;
+				  var punto="no";
+				  var rs=multiplicando.length;
+				  //Residuo de multiplicacion 
+				  for (var rm = 0 ; rm <= (multiplicador.length-1); rm++){
+				  	if(multiplicador[rm]!="."){
+				  		for(var mr=rs-1;mr>=0;mr--){
+		    	  			rsm[mr]=multiplicador[rm]*multiplicando[mr];
+		    	  			if(mr!=rs-1){
+		    	  				rsm[mr]=rsm[mr]+parseInt(rsm[mr+1]);
+		    	  			}		    	  			
+		    	  			console.log("multi",multiplicador[rm],multiplicando[mr],rsm[mr]);
+		    	  			if(rsm[mr]>=10){
+		    	  				var uni= (rsm[mr]/10).toString().split(".");
+		    	  				rsm[mr]=uni[0];
+		    	  			}else{
+		    	  				if(multiplicando[mr]=="."){
+		    	  					rsm[mr]=rsm[mr+1];
+				  					rsm[mr+1]="&nbsp&nbsp";
 
+					  			}else{
+			    	  				rsm[mr]="&nbsp&nbsp";
+					  			}
+		    	  			}
+		    	  			console.log("i",mr,rsm[mr]);	
+		    	  			//dar++;	
+		    	  		  	  		
+				  		}
+				 
+		    	  	$('.resmulti').append('<div class="row reside'+rm+' ejemplo">');
+		    	  	for (var i = 0; i <= rs; i++) {
+		    	  		
+		    	  		if(i==rs){
+		    	  			$('.reside'+rm).append('<button type="button" class="btn residuo mr-1" disabled><b>&nbsp&nbsp</b>');
+		    	  		}if(i!=0 && i!=rs){
+		    	  			$('.reside'+rm).append('<button type="button" class="btn residuo mr-1" disabled><b>'+rsm[i]+'</b>');
+		    	  		}
+		    	  	}
+				  	
+				  	console.log(rsm,rm);
+				  	rsm=[];
+				  	dar=0;
+				  	}
+				  }
+				  //console.log(rsm);
+				   extractIntrucciones(operacion,categoria);
 		   break;
+		   //--Division--
+		   case 'division':
+		   //--igualar inputs sin texto a 0--
+		   	$( ".numero" ).each(function() {
+		  		if ($(this).val() == '') {
+		  			$(this).val(0);
+		  		}
+		  		
+			});
+
+			//--obtener valores de inputs--
+				var num1=$('#firstnumber').val();
+				var num2=$('#secondnumber').val();
+			//--realizar operacion y pasar valor a input--
+			resultado= (num1/num2);
+			if(categoria=="enteros"){
+				if(Number.isInteger(resultado)==false){
+					resultado=resultado.toFixed(3);
+				}
+			}
+				
+				$('#resultado').val(resultado);
+			//--obtener valor de input de resultado--
+				var num3=$('#resultado').val();
+			//--agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--
+				$('.simbol').html('/');
+				$('.flecha').html('');
+		    
+		    	$('.operacion-desglosada').hide();
+		    	$('.o-division').show();
+		    	$('.residuos').empty();
+		    	var dividendo=num1.split("");
+		    	var divisor = num2.split("");
+		    	var divide = num3.split("");
+		    	console.log("dividor",dividendo,"=",divisor);
+		    	$.each(dividendo, function(i, val){
+					$('.dividendo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+				$.each(divisor, function(i, val){
+					$('.divisor').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
+				});
+				// variable total digitos divisor
+				var nrestar=0;
+				var numd=divisor.length;
+				
+				// variable primer digito divisor
+				var vnumd=numd-1;
+				var digito="";
+				var dgdiv="";
+				var endo=dividendo.length;
+				var dprimer;
+
+				//dividir dividendo a numero de digitos iguales a divisor
+				for (var dg=0;dg <= numd-1;dg++){
+					digito=digito+dividendo[dg];
+					if(dg==vnumd){
+						dgdiv=digito;											
+					}
+				}
+				for (var dv =0 ; dv <= divide.length-1; dv++) {
+					if(isNaN(divide[dv])==false){
+						nrestar=divide[dv]*num2;
+						digito=dgdiv-nrestar;
+						var nres=nrestar.toString().split("");
+						dprimer=nres.length;
+						$('.residuos').append('<div class="row menosdiv linea-res dres-'+dv+'">');
+						$('.dres-'+dv).append('<h4 class="simbol">-</h4>');
+						var difres=(numd-1)-nres.length;
+						if(nres.length!=numd+1){
+							for (var fr = difres; fr >= 0; fr--) {
+								nres.unshift("&nbsp&nbsp");
+							}
+							
+						}
+						$.each(nres,function(i,val){
+
+							$('.dres-'+dv).append('<button type="button" class="btn" disabled><b>'+val+'</b>');
+
+						});
+					
+					$('.residuos').append('</div>');
+					$('.residuos').append('<div class="row restardiv igual-'+dv+'">');
+					console.log("resta",digito,dividendo[numd]);
+					if(dividendo[numd]!==undefined){
+						digito=digito+""+dividendo[numd];
+					}else{
+						digito=digito+""+0;
+					}
+					
+					console.log("resta des",digito,numd);
+					if(digito!=undefined){
+					var dspt=digito.toString().split("");
+					console.log('dspt',dspt);
+					var sp=numd;
+					console.log('sp',sp);	
+					}	
+					var dif=(numd)-dspt.length;
+					console.log("diferencia",dif);
+					if(dspt.length!=numd+1){
+						
+							for (var di = dif; di >= 0; di--) {
+								dspt.unshift("&nbsp&nbsp");
+								
+							}	
+							if(sp>endo){
+									dspt.unshift("&nbsp&nbsp");
+									dspt.shift();
+									dspt.push(0);
+								}
+						
+						
+					}
+					$.each(dspt,function(i,val){
+						$('.igual-'+dv).append('<button type="button" class="btn " disabled><b>'+val+'</b>');
+					})
+					
+					numd++;
+					dgdiv=digito;
+					}
+					
+				}
+				 extractIntrucciones(operacion,categoria);
+		    break;
 		  default:
 		    // code block
 		}
@@ -335,9 +594,11 @@ var resdec = [];
 	function decimal(tecla){
 		if(tecla.charCode < 48 || tecla.charCode > 57) return false;
 	}
+	
 	function extractIntrucciones(operador,categoria){
 		var tipo = operador+'_'+categoria;
-		//console.log(tipo);
+		//$('.instrucciones').empty();
+		console.log("instrucciones",tipo);
 		 $.getJSON("./json/instrucciones.json", function(result){
 		    $.each(result, function(i, field){
 		    	if(i == tipo){
@@ -345,7 +606,7 @@ var resdec = [];
 		    	}
 		      
 		    });
-		   	$('.instrucciones').empty();
+		   
 			$.each(data, function(i, val){
 				$('.instrucciones').append('<div class="col-md-4 mb-3"><div class="card card-instrucciones h-100"><p>'+val+'</p>');
 				
@@ -359,7 +620,8 @@ var resdec = [];
 	function crear_explicacion(num1,num2,num3,oper){
 		newnumone = [];		
 		numpri=[];
-
+		inpri="";
+		inmen="";
 		res1 = num1.split("");
     	res2 = num2.split("");
     	res3 = num3.split("");
@@ -371,9 +633,10 @@ var resdec = [];
     	$.each(res2, function(i, val){
 			$('.numtwo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
 		});
-    	$.each(res3, function(i, val){
+		$.each(res3, function(i, val){
 			$('.numresul').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
 		});
+    	
 		if(oper=="suma"||oper=="resta"){
 			if(res1.length >= res2.length){
 				    numpri = res1;
@@ -402,7 +665,9 @@ var resdec = [];
 				      }
 				      index--;
 				  }
+			
 		}
+
     	
     	switch (oper) {
     		case 'suma':
@@ -411,10 +676,17 @@ var resdec = [];
     			}else{
     				oper_sumadec(numpri,newnumone);
     			}
-    			
+    		
     			break;
     		case 'resta':
-    			oper_resta(res1,res2);
+    			if (categoria=="enteros") {
+    				oper_resta(numpri,newnumone,inpri,inmen);
+    			}else{
+    				oper_restadec(numpri,newnumone);
+    			}
+    			break;
+    		case 'multiplicacion':
+    			
     			break;
     	}
 		
@@ -484,42 +756,91 @@ var resdec = [];
 	}
 
 	function oper_resta(valor1,valor2){
-		newnumone = [];
 		res = [];
-		numpri=[];
-		var minuendo;
-		var sustraendo;
-			console.log("numone",valor1,"numtwo",valor2);
-				  if(valor1.length >= valor2.length){
-				    numpri = valor1;
-				    minuendo =numpri;
-				  }else{
-				    numpri = valor2;
-				    sustraendo= numpri;
-				  }
+		var minuendo=valor1;
+		var sustraendo=valor2;
+		var cambio="no";
+		  
+		  console.log("input1",minuendo,"input2",sustraendo);
+		  for(var r=(minuendo.length-1);r>=0;r--){
+		  			minuendo[r]=parseInt(minuendo[r]);
+		  			sustraendo[r]=parseInt(sustraendo[r]);
+		  			var resta = minuendo[r]-sustraendo[r];
+		  			console.log("La resta",resta);
+		  		if(resta<0){
+		  			minuendo[r-1]=(minuendo[r-1])-1;
+		  			res[r]=minuendo[r]+10;
+		  			res[r-1]=minuendo[r-1];
+		  			cambio="si";
+		  		}else{
+		  			if(cambio=="no"){
+		  				res[r]="";
+		  			}else{
+		  				res[r-1]="";
+		  			}
+		  			
+		  		}
 
-				  if(valor1.length <= valor2.length){
-				    nummen = valor1;
-				  }else{
-				    nummen = valor2;
-				  }
+		  		console.log(res);
+		  		
+		  }
 
-				  if (valor1.length == valor2.length) {
-				  	numpri=valor1;
-				  	nummen=valor2;
-				  }
+		  $.each(res, function(i, val){
+		  	if(val!=undefined){
+		  		$('.reside').append('<button type="button" class="btn residuo" disabled><b>'+val+'</b>');
+		  	}else{
+		  		$('.reside').append('<button type="button" class="btn residuo" disabled><b>&nbsp&nbsp</b>');
+		  	}
+			});
+				  
+	}
 
-				  var index = (nummen.length-1);
-				  for (var d = (numpri.length-1); d >= 0; d--) {
-				      console.log("valor d ",d, nummen[index]);
-				      if (nummen[index] == undefined) {
-				        newnumone[d] = 0;
-				      }else{
-				        newnumone[d] = parseInt(nummen[index]);
-				      }
-				      index--;
-				  }
-				  console.log("numone",numpri,"numtwo",newnumone);
-				  numpri
+	function oper_restadec(valor1,valor2){
+		res = [];
+		var minuendo=valor1;
+		var sustraendo=valor2;
+		var cambio="no";
+		  
+		  console.log("input1",minuendo,"input2",sustraendo);
+		  for(var r=(minuendo.length-1);r>=0;r--){
+		  			minuendo[r]=parseInt(minuendo[r]);
+		  			sustraendo[r]=parseInt(sustraendo[r]);
+		  			var resta = minuendo[r]-sustraendo[r];
+		  			console.log("La resta",resta);
+		  		if(resta<0){
+		  			if(isNaN(minuendo[r-1])==true){
+		  				console.log("entre decimal");
+		  				minuendo[r-2]=(minuendo[r-2])-1;
+		  				res[r-1]=".";
+		  				res[r]=minuendo[r]+10;
+		  				res[r-2]=minuendo[r-2];
+		  			}else{
+		  				minuendo[r-1]=(minuendo[r-1])-1;
+		  				res[r]=minuendo[r]+10;
+		  				res[r-1]=minuendo[r-1];
+		  			}
+		  			
+		  			cambio="si";
+		  		}else{
+		  			if(cambio=="no"){
+		  				res[r]="";
+		  			}else{
+		  				res[r-1]="";
+		  			}
+		  			
+		  		}
+
+		  		console.log(res);
+		  		
+		  }
+
+		  $.each(res, function(i, val){
+		  	if(val!=""){
+		  		$('.reside').append('<button type="button" class="btn residuo" disabled><b>'+val+'</b>');
+		  	}else{
+		  		$('.reside').append('<button type="button" class="btn residuo" disabled><b>&nbsp&nbsp</b>');
+		  	}
+			});
+				  
 	}
 });
