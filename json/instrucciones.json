@@ -12,7 +12,7 @@
 	"resta_enteros":
 		[
 			"Las cifras se acomodan de derecha a izquierda y se restan en el mismo orden",
-			"Cuando el número de arriba es menor se toma uno del numero siguiente convirtiéndose en uno de dos cifras."
+			"Cuando el número de arriba es menor se toma uno del numero siguiente convirtiéndose en uno de dos cifras.",
 			"Si el número siguiente es cero o menor se toma un valor del siguiente."
 		],
 	"resta_decimales":
@@ -23,20 +23,20 @@
 	"multiplicacion_enteros":
 		[	
 			"Cuando el supera las dos cifras, la de la izquierda se coloca en la siguiente hilera y se suma en el siguiente resultado.",
-			"Se multiplica de derecha a izquierda por cada uno de los números de arriba."
-			"Se deja un espacio en blanco y el segundo número multiplica a los de arriba."
-			"El primer número multiplica todas las cifras de arriba y se coloca en la primer línea."
+			"Se multiplica de derecha a izquierda por cada uno de los números de arriba.",
+			"Se deja un espacio en blanco y el segundo número multiplica a los de arriba.",
+			"El primer número multiplica todas las cifras de arriba y se coloca en la primer línea.",
 			"Los resultados se suman para obtener el resultado final."
 		],	
 	"multiplicacion_decimales":
 		[	
-			"Se multiplica de la misma forma que con enteros, pero en el resultado se coloca el punto, contando de derecha a izquierda tantas cifras decimales tengan los factores.",
+			"Se multiplica de la misma forma que con enteros, pero en el resultado se coloca el punto, contando de derecha a izquierda tantas cifras decimales tengan los factores."
 			
 		],	
 	"division_enteros":
 		[	
 			"En este caso se utiliza la tabla del 4, buscando uno en uno los resultados de izquierda a derecha.",
-			"El resultado se resta y se baja el siguiente numero."
+			"El resultado se resta y se baja el siguiente numero.",
 			"Si se requiere continuar se coloca un punto y se baja un 0."
 		],
 	"division_decimales":
