@@ -597,7 +597,7 @@ var inpri, inmen;
 	
 	function extractIntrucciones(operador,categoria){
 		var tipo = operador+'_'+categoria;
-		//$('.instrucciones').empty();
+		$('.instrucciones').empty();
 		console.log("instrucciones",tipo);
 		 $.getJSON("./json/instrucciones.json", function(result){
 		    $.each(result, function(i, field){
