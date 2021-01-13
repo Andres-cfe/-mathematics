@@ -1,0 +1,18 @@
+
+.expo-oper{
+	height: 8px;
+    line-height: 7;
+}
+.expo{
+	width: 60%;
+    height: 55%;
+}
+
+.respuesta{
+	font-size: 24px;
+    margin-left: 1.5rem!important;
+}
+
+.shadow label{
+	font-size: 30px;
+}

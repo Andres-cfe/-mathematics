@@ -1,8 +1,204 @@
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-12 text-center">
-        <h3>Fracciones</h3>
+<section class="dashboard row">
+    <div class="col-lg-12 col-md-12 col-12 text-center mb-4">
+        <h3>∧ Exponentes ∧</h3>
     </div>
-    <link rel="stylesheet" type="text/css" href="../css/pruebas.css">
+
+    <div class="col-md-4">
+        <div class=" card card-oper h-100">
+          <div class="expo-oper">
+            <!--ejemplo visual-->
+            <h3>a<sup>2</sup> ▪ a<sup>6</sup> = a<sup>8</sup></h3>
+
+          </div>
+          <div class="item-box-blog-body">
+            <!--Titulo-->
+            <div class="item-box-blog-heading mt-5">
+              <h5>Multiplicacion</h5>
+            </div>
+            <!--Contenido-->
+            <div class="container-fluid">
+                <p class="">El <strong>producto de potencias de igual  base</strong> es igual a la misma base elevada a la suma de los exponentes.</p>
+                <p class="">Para obtener el <strong>producto de potencias de igual exponente</strong>, debemos multiplicar las bases y mantener el exponente.</p>
+                
+            </div>
+            <!--boton-->
+            <div class="mt">
+             <a href="#" tabindex="0" data="multiplica" class="btn-operacion btn bg-yellow m-4">Multiplicar</a>
+            </div>  
+                                  
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class=" card card-oper h-100">
+          <div class="expo-oper">
+            <!--ejemplo visual-->
+            <h3>a<sup>5</sup> / a<sup>3</sup> = a<sup>2</sup></h3>
+
+          </div>
+          <div class="item-box-blog-body">
+            <!--Titulo-->
+            <div class="item-box-blog-heading mt-5">
+              <h5>División</h5>
+            </div>
+            <!--Contenido-->
+            <div class="container-fluid">
+                <p class="">La <strong>división de potencias </strong>con la misma base es otra potencia con la <strong>misma base</strong> y cuyo <strong>exponente</strong> es la <strong>diferencia</strong> de los exponentes.</p>
+                <p class="">La división de potencias con el mismo exponente es otra <strong>potencia</strong>  con el mismo exponente y cuya base es el <strong>cociente</strong> de las bases.</p>
+                
+            </div>
+            <!--boton-->
+            <div class="mt">
+             <a href="#" tabindex="0" data="divide" class="btn-operacion btn bg-yellow m-4">Dividir</a>
+            </div>  
+                                  
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class=" card card-oper h-100">
+          <div class="expo-oper">
+            <!--ejemplo visual-->
+            <h3>a<sup>2</sup> ▪ a<sup>6</sup> = a<sup>8</sup></h3>
+
+          </div>
+          <div class="item-box-blog-body">
+            <!--Titulo-->
+            <div class="item-box-blog-heading mt-5">
+              <h5>Raiz</h5>
+            </div>
+            <!--Contenido-->
+            <div class="container-fluid">
+                <p class="">El <strong>producto de potencias de igual  base</strong> es igual a la misma base elevada a la suma de los exponentes.</p>
+                <p class="">Para obtener el <strong>producto de potencias de igual exponente</strong>, debemos multiplicar las bases y mantener el exponente.</p>
+                
+            </div>
+            <!--boton-->
+            <div class="mt">
+             <a href="#" tabindex="0" data="raiz" class="btn-operacion btn bg-yellow m-4">Obtener raiz</a>
+            </div>  
+                                  
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-4">
+        <div class=" card card-oper h-100">
+          <div class="expo-oper">
+            <!--ejemplo visual-->
+            <h3>a<sup>2</sup> ▪ a<sup>6</sup> = a<sup>8</sup></h3>
+
+          </div>
+          <div class="item-box-blog-body">
+            <!--Titulo-->
+            <div class="item-box-blog-heading mt-5">
+              <h5>Potencias</h5>
+            </div>
+            <!--Contenido-->
+            <div class="container-fluid">
+                <p class="">La <strong>potencia</strong> a<sup>n</sup> representa el producto que tiene <strong>n</strong> veces el valor de <strong>a</strong>.</p>
+                <p class="">El valor de <strong>a</strong> se llama <strong>base</strong> y el valor <strong>n</strong> se llama exponente.</p>
+                
+            </div>
+            <!--boton-->
+            <div class="mt">
+             <a href="#" tabindex="0" data="potencia" class="btn-operacion btn bg-yellow m-4">Potenciar</a>
+            </div>  
+                                  
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="descripcion row" style="display: none;">
+        <div class="col-lg-12 col-md-12 col-12 text-center">
+            <h4 class="title">title</h4>
+        </div>
+        <div class="col-lg-12 col-md-12 col-12 mb-5">
+          <button id="btn-regresar" type="button" class="btn btn-primary"><i class="fas fa-angle-double-left"></i> Regresar menú anterior</button>  
+        </div>
+    </section>
+
+    <section class="exponente-content row" style="display: none;">
+        <div class="col-lg-12 col-md-12 col-12">
+            <p>Introduce en los campos correspondientes los valores para realizar la operación.</p>
+        </div>
+
+        <div class="card shadow col-lg-6 col-md-6 col-12 mb-5">
+            <div class="card-header text-center">
+                <h4 class="card-title"></h4>
+            </div>
+            <form id="datos" class="card-body row" autocomplete="off" style="max-height: 200px;display: none;">
+                <div class="col-lg-4 col-md-4 col-4 mt-2 ml-2">
+                    <input type="number" class="expo exponente form-control float-right" placeholder="n"  id="exp1" autocomplete="off" required>
+                    <input type="text" class="expo base form-control m-1 text-center" placeholder="Base" id="base1" autocomplete="off" pattern="[A-Za-z0-9]+">
+                </div>
+                <div class="col-lg-2 col-md-2 col-2 mt-4">
+                   <button id="Operacion" type="button" class="signo btn btn-danger" disabled><b></b></button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-4 mt-2">
+                    <input type="number" class="expo exponente form-control float-right" placeholder="n"  id="exp2" autocomplete="off">
+                    <input type="text" class="expo base form-control m-1 text-center" placeholder="Base" id="base2" autocomplete="off" pattern="[A-Za-z0-9]">
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-4 mt-4">
+                    <button type="button" data="datos" class="resolver btn btn-info">Resolver <i class="fas fa-edit"></i> </button>
+                </div>
+            </form>
+
+            <form id="epotencia" class="card-body row" autocomplete="off" style="max-height: 200px;display: none;">
+                <div class="col-lg-1 col-md-1 col-1 mt-4 ">
+                    <label>(</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-3 mt-2">
+                    <input type="number" class="expo exponente form-control float-right" placeholder="n"  id="pexp1" autocomplete="off">
+                    <input type="text" class="expo base form-control m-1 text-center" placeholder="Base" id="pbase" autocomplete="off" pattern="[A-Za-z0-9]">
+                </div>
+                <div class="col-lg-1 col-md-1 col-1 mt-4">
+                    <label>)</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-3 mt-2 text-right">
+                    <input type="number" class="expo exponente form-control float-left" placeholder="n"  id="pexp2" autocomplete="off">
+                   
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-4 mt-4">
+                    <button type="button" data="datos1" class="resolver btn btn-info">Resolver <i class="fas fa-edit"></i> </button>
+                </div>
+            </form>
+
+            <form id="eraiz" class="card-body row" autocomplete="off" style="max-height: 200px;display: none;">
+                <div class="col-lg-3 col-md-3 col-3 mt-2">
+                    <input type="number" class="expo exponente form-control float-right" placeholder="n"  id="expfuera" autocomplete="off">
+                </div>
+                <div class="col-lg-1 col-md-1 col-1">
+                   <label>(√</label> 
+                </div>
+                <div class="col-lg-4 col-md-4 col-4 mt-2">
+                    <input type="text" class="expo base form-control m-1 text-center" placeholder="raiz" id="raiz" autocomplete="off" pattern="[A-Za-z0-9]">
+                </div>
+                <div class="col-lg-1 col-md-1 col-1">
+                    <label>)</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-3 mt-2 text-right">
+                    <input type="number" class="expo exponente form-control float-left" placeholder="n"  id="expp2" autocomplete="off">
+                </div>
+                
+                <div class="col-lg-4 col-md-4 col-4 mt-4">
+                    <button type="button" data="eraiz" class="resolver btn btn-info">Resolver <i class="fas fa-edit"></i> </button>
+                </div>
+            </form>
+        </div>
+
+        <!------------- DESARROLLO DE LAS CONVERSIÓN ------------------->
+        <div class="card shadow desarrollo-exponente col-lg-6 col-md-6 col-12 text-center mb-5 py-3" style="display: none;">
+          <h3>Resultado: </h3><p class="resultado-exponente respuesta"></p>
+
+          <div class="explicacion col-lg-12 col-md-12 col-12"></div>
+        
+        </div>
+    </section>
     <h4>Multiplicacion</h4>
     <p>
     
@@ -29,5 +225,5 @@
     </p>
     <div id="potdesarrollo"></div>
 
-    <script src="../js/Exponentes.js"></script>
+    <script src="./js/Exponentes.js"></script>
 </div>

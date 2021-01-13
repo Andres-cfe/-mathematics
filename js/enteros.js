@@ -9,6 +9,9 @@ var newnumonedec = [];
 var numpridec=[];
 var resdec = [];
 var inpri, inmen;
+$('.number').on('input', function () { 
+    this.value = this.value.replace(/[^0-9]/g,'');
+});
 	//-----------------------------------------------------
 	//--------	DETERMINAR TIPO DE OPERACION  -------------
 	//-----------------------------------------------------
@@ -355,7 +358,7 @@ var inpri, inmen;
 				var num1=$('#firstnumber').val();
 				var num2=$('#secondnumber').val();
 			//--realizar operacion y pasar valor a input--
-				resultado= num1* num2;
+				resultado= parseFloat(num1)*parseFloat(num2);
 				$('#resultado').val(resultado);
 			//--obtener valor de input de resultado--
 				var num3=$('#resultado').val();
@@ -368,7 +371,7 @@ var inpri, inmen;
 		    	crear_explicacion(num1,num2,num3,operacion);
 		    	var multiplicando=num1.split("");
 		    	var multiplicador=num2.split("");
-		    	//var rm=[];
+		    	var numsd=num1.replace('.', '');
 		    	var valm=[];
 		    	var rsm=[];
 		    	var a=0;
@@ -377,7 +380,7 @@ var inpri, inmen;
 		    	//Realiza multiplicacion por multiplicador
 		    	  for (var m = (multiplicador.length-1); m >= 0; m--) {
 		    	  		if(multiplicador[m]!="."){
-		    	  			valm[a]=multiplicador[m]*num1;
+		    	  			valm[a]=multiplicador[m]*numsd;
 			    	  		var ures=valm[a].toString().split("");
 			    	  		console.log("ures",ures);
 			    	  		$('.multiplica').append('<div class="row numresul'+a+' ejemplo">');
@@ -474,12 +477,16 @@ var inpri, inmen;
 				var num2=$('#secondnumber').val();
 			//--realizar operacion y pasar valor a input--
 			resultado= (num1/num2);
-			if(categoria=="enteros"){
+			
 				if(Number.isInteger(resultado)==false){
-					resultado=resultado.toFixed(3);
+					resultado=resultado.toFixed(2);
 				}
-			}
-				
+			
+			if(categoria=="decimales"){
+					num1=parseInt(num1*100);
+					num2=parseInt(num2*100);
+				}
+				console.log("numero2",num2);
 				$('#resultado').val(resultado);
 			//--obtener valor de input de resultado--
 				var num3=$('#resultado').val();
@@ -490,9 +497,10 @@ var inpri, inmen;
 		    	$('.operacion-desglosada').hide();
 		    	$('.o-division').show();
 		    	$('.residuos').empty();
-		    	var dividendo=num1.split("");
-		    	var divisor = num2.split("");
+		    	var dividendo=num1.toString().split("");
+		    	var divisor = num2.toString().split("");
 		    	var divide = num3.split("");
+		    	var dvres=num3.split("");
 		    	console.log("dividor",dividendo,"=",divisor);
 		    	$.each(dividendo, function(i, val){
 					$('.dividendo').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
@@ -515,9 +523,23 @@ var inpri, inmen;
 				for (var dg=0;dg <= numd-1;dg++){
 					digito=digito+dividendo[dg];
 					if(dg==vnumd){
-						dgdiv=digito;											
+						dgdiv=digito;	
+						if(num2>digito){
+							dgdiv=digito+dividendo[dg+1];
+							numd=numd+1;
+						}										
 					}
 				}
+
+				for (var i = numd-1; i >= 1; i--) {
+					console.log("numd-1",numd,"i",i);
+					dvres.unshift("&nbsp&nbsp");
+					console.log("numd-1",dvres,"i",i);
+				}
+
+				$.each(dvres,function(i,val){
+				 		$('.result').append('<button type="button" class="btn " disabled><b>'+val+'</b>')
+				 	});
 				for (var dv =0 ; dv <= divide.length-1; dv++) {
 					if(isNaN(divide[dv])==false){
 						nrestar=divide[dv]*num2;
@@ -580,6 +602,7 @@ var inpri, inmen;
 					}
 					
 				}
+				 	
 				 extractIntrucciones(operacion,categoria);
 		    break;
 		  default:

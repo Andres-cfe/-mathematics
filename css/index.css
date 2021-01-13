@@ -272,6 +272,11 @@ section #services li div:hover {
     padding: 0.5rem 6px;
     font-size: 15px;
 }
+.o-division .result .btn{
+    padding: 0.5rem 7px;
+    color: red;
+    font-size: 15px;
+}
 .restardiv{
   margin-left: 1.5px;
 }

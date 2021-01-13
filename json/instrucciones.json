@@ -41,7 +41,7 @@
 		],
 	"division_decimales":
 		[	
-			"En este caso el punto se recorre hasta que quede un número natural en el número de fuera de la casilla y los mismos números se recorren en la casilla de dentro.",
+			"En este caso debemos tener los valores del dividendo y divisor como numeros enteros por lo cual multiplicamos ambos valores por 100.",
 			"Se resuelve de manera normal."
 		]	
 }
