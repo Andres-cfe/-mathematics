@@ -1,5 +1,19 @@
 jQuery(document).ready(function($){
 
+    //-----------------------------------------------------
+    //------------  ANIMACIÓN DE TEXTOS  ------------------
+    //-----------------------------------------------------
+      $('.titlemenu').textillate({
+         in: { 
+          effect: 'bounceIn' 
+        },
+        out:{
+          effect: 'rotateOutDownRight'
+        },
+        loop: true
+      });
+
+
 var categoria;
 var data = [];
 var newnumone = [];

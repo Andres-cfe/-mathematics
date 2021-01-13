@@ -4,7 +4,7 @@
     ---------------------------------------------- -->
     <section class="dashboard row">
         <div class="col-lg-12 col-md-12 col-12 text-center mb-4">
-            <h2>◔ Fracciones ◕</h2>
+            <h1 class="titlemenu">◔ Fracciones ◕</h1>
         </div>
 
          <!--Inicia tarjeta identificación-->
@@ -55,19 +55,19 @@
                     <p>
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-2">
-                            <button type="button" class="btn btn-success">N</button>
+                            <button type="button" class="btn bg-numerador">N</button>
                         </div>
                         <div class="col-lg-2 col-md-2 col-2">
-                            <button type="button" class="btn btn-success">N</button>
+                            <button type="button" class="btn bg-numerador">N</button>
                         </div>
                         <div class="col-lg-2 col-md-2 col-2">
-                            <button type="button" class="btn btn-danger">D</button>
+                            <button type="button" class="btn bg-denominador">D</button>
                         </div>
                         <div class="col-lg-2 col-md-2 col-2">
-                            <button type="button" class="btn btn-danger">D</button>
+                            <button type="button" class="btn bg-denominador">D</button>
                         </div>
                         <div class="col-lg-2 col-md-2 col-2">
-                            <button type="button" class="btn btn-danger">D</button>
+                            <button type="button" class="btn bg-denominador">D</button>
                         </div>
                     </div>
                     </p>
@@ -339,6 +339,39 @@
               </div>
             </div>
           </div>
+
+
+
+         <!--Inicia tarjeta de suma -->
+          <div class="col-lg-4 col-md-4 col-12 mt-4">
+            <div class=" card card-oper h-100">
+              <div class="icon-oper">
+                <!--Imagen-->
+                <i class="fas fas fa-star-half fa-3x"></i><i class="fas fa-plus-circle fa-2x"></i><i class="fas fas fa-star-half fa-3x"></i><i class="fas fas fa-equals fa-2x"></i><i class="fas fas fa-star fa-3x"></i>
+
+              </div>
+              <div class="item-box-blog-body">
+                <!--Titulo-->
+                <div class="item-box-blog-heading mt-5">
+                  <h5>Suma</h5>
+                </div>
+                <!--Contenido-->
+                <div class="container-fluid">
+                  <p></p>
+
+                </div>
+                <!--botones-->
+                
+                <div class="mt"> <a href="#" tabindex="0" data="suma" class="btn-operacion btn bg-yellow m-4">Suma</a>
+                <!--
+                <a href="#" tabindex="0" data="suma-decimales" class="btn-operacion btn bg-yellow m-4">Decimales</a> --> </div>  
+                                  
+              </div>
+            </div>
+          </div>
+
+
+
     </section>
 
 
@@ -370,7 +403,7 @@
             </div>
             <form id="propias" class="card-body row" autocomplete="off" style="max-height: 300px;">
                 <div class="col-lg-4 col-md-4 col-6">
-                    <input type="number" class="numero form-control m-1" placeholder="Numerador" id="numerador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-numerador" placeholder="Numerador" id="numerador" autocomplete="off">
                 </div>
                 <div class="col-lg-8 col-md-8 col-6"></div>
                 <div class="col-lg-4 col-md-4 col-6">
@@ -378,7 +411,7 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-6"></div>
                 <div class="col-lg-4 col-md-4 col-6">
-                    <input type="number" class="numero form-control m-1" placeholder="Denominador" id="denominador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-denominador" placeholder="Denominador" id="denominador" autocomplete="off">
                 </div>
                 <div class="col-lg-8 col-md-8 col-6">
                     <button type="button" data="propia" class="paint btn btn-info">Dibujar <i class="fas fa-edit"></i> </button>
@@ -392,8 +425,8 @@
             <p class="explicacion"></p>
             <div class="propias" style="display: none;">
                 <div class="col-lg-12 col-md-12 col-12">
-                    <button type="button" class="btn-numerador mb-2 btn btn-danger">Numerador</button>
-                    <button type="buton" class="btn-denominador mb-2 btn btn-primary">Denominador</button>
+                    <button type="button" class="btn-numerador mb-2 btn bg-numerador">Numerador</button>
+                    <button type="buton" class="btn-denominador mb-2 btn bg-denominador">Denominador</button>
                 </div>
                 <div class="col-lg-12 col-md-12 col-12">
                     <canvas width="300" height="300" style="width: 250px; height:250px; margin: 0px auto; "></canvas>  
@@ -413,16 +446,16 @@
                         <h5 class="col-lg-3 col-md-3 col-3 mt-3">
                             cociente <i class="fas fa-arrow-right ml-2"></i>
                         </h5>
-                        <h3 class="cociente col-lg-1 col-md-1 col-1 pt-3" style="border: solid 2px blue;">
+                        <h3 class="cociente col-lg-1 col-md-1 col-1 pt-3" style="border: solid 2px #5cb85c; color:#5cb85c;">
                             X
                         </h3>
                         <h6 class="resultado-residuo col-lg-8 col-md-8 col-6">
                             <div class="col-lg-12 col-md-12 col-12 row">
-                               <h5 class="residuo mr-3" style="border: solid 2px orange;"></h5>    <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador 
+                               <h5 class="residuo mr-3" style="border: solid 2px #c33; color:#c33;"></h5>    <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador 
                             </div>
                             <hr class="col-lg-2 col-md-2 col-2 float-left" style="background-color: red;"><hr class="col-lg-10 col-md-10 col-10 border border-white">
                             <div class="resultado-denominador col-lg-12 col-md-12 col-12 row">
-                               <h5 class="denominador  mr-3" style="border: solid 2px purple;"></h5>      <i class="fas fa-arrow-left ml-2 mr-2"></i> Divisor y denominador original
+                               <h5 class="denominador  mr-3" style="border: solid 2px #36c; color:#36c;"></h5>      <i class="fas fa-arrow-left ml-2 mr-2"></i> Divisor y denominador original
                             </div>
                         </h6>
                     </div>
@@ -445,10 +478,10 @@
             </div>
             <form id="mixta" class="card-body row" autocomplete="off">
                 <div class="col-lg-4 col-md-4 col-4 mt4">
-                    <input type="number" class="numero form-control m-1" placeholder="Cociente" id="cociente" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-cociente" placeholder="Cociente" id="cociente" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Numerador" id="numerador-mixta" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-numerador" placeholder="Numerador" id="numerador-mixta" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
@@ -458,7 +491,7 @@
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Denominador" id="denominador-mixta" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-denominador" placeholder="Denominador" id="denominador-mixta" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4">
                     <button type="button" data="mixta" class="paint btn btn-info">Dibujar <i class="fas fa-edit"></i> </button>
@@ -499,11 +532,11 @@
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"><b>Fracción 2</b></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control" placeholder="Numerador" id="compnumerador1" autocomplete="off">    
+                    <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="compnumerador1" autocomplete="off">    
                 </div >
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                  <input type="number" class="numero form-control" placeholder="Numerador" id="compnumerador2" autocomplete="off">
+                  <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="compnumerador2" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
                 <div class="col-lg-4 col-md-4 col-4">
@@ -515,11 +548,11 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" id="compdenominador1" placeholder="Denominador" class="numero form-control" autocomplete="off">
+                    <input type="number" id="compdenominador1" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" id="compdenominador2" placeholder="Denominador" class="numero form-control" autocomplete="off">
+                    <input type="number" id="compdenominador2" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 offset-lg-8 col-md-12 offset-md-8 col-12 mt-3">
                   <button type="button" data="comparacion" class="paint btn btn-info">Comparar</button>
@@ -536,13 +569,13 @@
           <h3>Resultado: </h3><p class="resultado-comparacion"></p>
           <div class="col-lg-12 col-md-12 col-12 row">
             <div class="col-lg-4 col-md-4 col-4">
-              <div class="num1 col-lg-12 col-md-12 col-12">
+              <div class="num1 col-lg-12 col-md-12 col-12 text-numerador">
                 3
               </div>
               <div class="col-lg-12 col-md-12 col-12">
                 <hr class="border border-danger">
               </div>
-              <div class="den1 col-lg-12 col-md-12 col-12">
+              <div class="den1 col-lg-12 col-md-12 col-12 text-denominador">
                 4
               </div>
             </div>
@@ -550,25 +583,28 @@
               <i class="fas fa-random" style="font-size: 5em;"></i>
             </div>
             <div class="col-lg-4 col-md-4 col-4">
-              <div class="num2 col-lg-12 col-md-12 col-12">
+              <div class="num2 col-lg-12 col-md-12 col-12 text-numerador">
                 1
               </div>
               <div class="col-lg-12 col-md-12 col-12">
                 <hr class="border border-danger">
               </div>
-              <div class="den2 col-lg-12 col-md-12 col-12">
+              <div class="den2 col-lg-12 col-md-12 col-12 text-denominador">
                 2
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="figura-comparacion1 col-lg-6 col-md-6 col-12"> </div>
+            <div class="figura-comparacion2 col-lg-6 col-md-6 col-12"> </div>
+          </div>
           <div class="explicacion col-lg-12 col-md-12 col-12"></div>
         </div>
     </section>
 
 
     <!-- -----------------------------------------------------------------------------------------------------------------
-    ----------------------------------------------- DASHBOARD COMPARACIÓN ---------------------------------------------
+    ----------------------------------------------- DASHBOARD CONVERSION ---------------------------------------------
     ----------------------------------------------------------------------------------------------------------------- -->
     <section class="conversion row" style="display: none;">
         <div class="col-lg-12 col-md-12 col-12">
@@ -581,10 +617,10 @@
             </div>
             <form id="conversion" class="card-body row" autocomplete="off" style="max-height: 200px;">
                 <div class="col-lg-4 col-md-4 col-4 mt-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Entero" id="entero" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-cociente" placeholder="Entero" id="entero" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Numerador"  id="mixtonumerador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-numerador" placeholder="Numerador"  id="mixtonumerador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
@@ -594,7 +630,7 @@
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Denominador" id="mixtodenominador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-denominador" placeholder="Denominador" id="mixtodenominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4">
                     <button type="button" data="conversion" class="paint btn btn-info">Conversión <i class="fas fa-edit"></i> </button>
@@ -607,7 +643,27 @@
           <h3>Resultado: </h3><p class="resultado-conversion"></p>
 
           <div class="explicacion col-lg-12 col-md-12 col-12"></div>
-        
+          <div class="figuras-conversion col-lg-12 col-md-12 col-12 row">
+            <div class="col-lg-2 col-md-2 col-12 cociente-com">
+              cociente
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="num1-com">num 1</div>
+                <div><hr class="border border-danger"></div>
+                <div class="den1-com">den 1</div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 fig1-com">
+                figura 1
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="num2-com">num 2</div>
+                <div><hr class="border border-danger"></div>
+                <div class="den2-com">den 2</div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 fig2-com">
+                figura 2
+            </div>
+          </div>
         </div>
     </section>
 
@@ -631,11 +687,11 @@
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4"><b>Fracción 2</b></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control" placeholder="Numerador" id="numerador1" autocomplete="off">    
+                    <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="numerador1" autocomplete="off">    
                 </div >
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                  <input type="number" class="numero form-control" placeholder="Numerador" id="numerador2" autocomplete="off">
+                  <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="numerador2" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
                 <div class="col-lg-4 col-md-4 col-4">
@@ -643,11 +699,11 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" id="denominador1" placeholder="Denominador" class="numero form-control" autocomplete="off">
+                    <input type="number" id="denominador1" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" id="denominador2" placeholder="Denominador" class="numero form-control" autocomplete="off">
+                    <input type="number" id="denominador2" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 offset-lg-8 col-md-4 offset-md-8 col-12 mt-3">
                   <button type="button" data="equivalencia" class="paint btn btn-info">Comparar <i class="fas fa-edit"></i></button>
@@ -709,7 +765,7 @@
             </div>
             <form id="simplificacion" class="card-body row" autocomplete="off" style="max-height: 200px;">
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Numerador" id="simplnumerador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-numerador" placeholder="Numerador" id="simplnumerador" autocomplete="off">
                 </div>
                 <div class="col-lg-8 col-md-8 col-8"></div>
                 <div class="col-lg-4 col-md-4 col-4">
@@ -717,7 +773,7 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-8"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Denominador" id="simpldenominador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-denominador" placeholder="Denominador" id="simpldenominador" autocomplete="off">
                 </div>
                 <div class="col-lg-8 col-md-8 col-8">
                     <button type="button" data="simplificacion" class="paint btn btn-info">Simplificar <i class="fas fa-edit"></i> </button>
@@ -776,7 +832,7 @@
             </div>
             <form id="amplificacion" class="card-body row" autocomplete="off" style="max-height: 200px;">
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Numerador" id="amplnumerador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-numerador" placeholder="Numerador" id="amplnumerador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4">
                   <input type="number" class="numero form-control m-1" placeholder="Amplificar por" id="amplificador" autocomplete="off">
@@ -787,7 +843,7 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-8"></div>
                 <div class="col-lg-4 col-md-4 col-4">
-                    <input type="number" class="numero form-control m-1" placeholder="Denominador" id="ampldenominador" autocomplete="off">
+                    <input type="number" class="numero form-control m-1 bg-denominador" placeholder="Denominador" id="ampldenominador" autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-4 col-4"></div>
                 <div class="col-lg-4 col-md-4 col-4">
@@ -834,8 +890,58 @@
     </section>
 
 
+    <!-- -----------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------- DASHBOARD SUMA   ---------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------- -->
+    <section class="suma row" style="display: none;">
+        <div class="col-lg-12 col-md-12 col-12">
+            <p>Introduce en los campos correspondientes los valores para realizar la comparación.</p>
+        </div>
+
+      <div class="card col-lg-6 col-md-6 col-12">
+          <div class="card-header text-center">
+            <p><b>Suma de fracciones</b></p>
+          </div>
+            <form id="suma" class="card-body row" autocomplete="off" style="max-height: 250px;">
+                <div class="col-lg-4 col-md-4 col-4"><b>Fracción 1</b></div>
+                <div class="col-lg-4 col-md-4 col-4"></div>
+                <div class="col-lg-4 col-md-4 col-4"><b>Fracción 2</b></div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="sumanumerador1" autocomplete="off">    
+                </div >
+                <div class="col-lg-4 col-md-4 col-4"></div>
+                <div class="col-lg-4 col-md-4 col-4">
+                  <input type="number" class="numero form-control bg-numerador" placeholder="Numerador" id="sumanumerador2" autocomplete="off">
+                </div>
+                <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
+                <div class="col-lg-4 col-md-4 col-4 text-center">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="col-lg-4 col-md-4 col-4"><hr class="border border-danger"></div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <input type="number" id="sumadenominador1" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
+                </div>
+                <div class="col-lg-4 col-md-4 col-4"></div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <input type="number" id="sumadenominador2" placeholder="Denominador" class="numero form-control bg-denominador" autocomplete="off">
+                </div>
+                <div class="col-lg-4 offset-lg-8 col-md-12 offset-md-8 col-12 mt-3">
+                  <button type="button" data="suma" class="paint btn btn-info">Sumar</button>
+                </div>
+            </form>
+      </div>
+
+      <div class="card desarrollo-suma col-lg-6 col-md-6 col-12 text-center">
+        <h3>Resultado: </h3><p class="resultado-suma row"></p>
+
+        <div class="explicacion col-lg-12 col-md-12 col-12">
+        </div>
+
+      </div>
 
 
+
+    </section>
 
 
 

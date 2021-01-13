@@ -1,0 +1,48 @@
+.bg-numerador{
+	background-color: #c33 !important;
+    color: white !important;
+}
+
+.bg-numerador::-webkit-input-placeholder { color: white; opacity: 0.60} 
+
+.bg-numerador:-moz-placeholder { /* Firefox 18- */ color: white; opacity: 0.60} 
+
+.bg-numerador::-moz-placeholder { /* Firefox 19+ */ color: white; opacity: 0.60} 
+
+.bg-numerador:-ms-input-placeholder { color: white; opacity: 0.60}
+
+.text-numerador{
+	color:#c33;
+}
+
+
+.bg-denominador{
+	background-color: #36c !important;
+	color: white !important;
+}
+
+.bg-denominador::-webkit-input-placeholder { color: white; opacity: 0.60} 
+
+.bg-denominador:-moz-placeholder { /* Firefox 18- */ color: white; opacity: 0.60} 
+
+.bg-denominador::-moz-placeholder { /* Firefox 19+ */ color: white; opacity: 0.60} 
+
+.bg-denominador:-ms-input-placeholder { color: white; opacity: 0.60}
+
+.text-denominador{
+	color: #36c;
+}
+
+
+.bg-cociente{
+	background-color: #5cb85c !important;
+	color: white !important;
+}
+
+.bg-cociente::-webkit-input-placeholder { color: white; opacity: 0.60} 
+
+.bg-cociente:-moz-placeholder { /* Firefox 18- */ color: white; opacity: 0.60} 
+
+.bg-cociente::-moz-placeholder { /* Firefox 19+ */ color: white; opacity: 0.60} 
+
+.bg-cociente:-ms-input-placeholder { color: white; opacity: 0.60}

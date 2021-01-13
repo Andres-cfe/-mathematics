@@ -1,5 +1,18 @@
 jQuery(document).ready(function($){
 
+    //-----------------------------------------------------
+    //------------  ANIMACIÓN DE TEXTOS  ------------------
+    //-----------------------------------------------------
+      $('.titlemenu').textillate({
+         in: { 
+          effect: 'bounceIn' 
+        },
+        out:{
+          effect: 'rotateOutDownRight'
+        },
+        loop: true
+      });
+
 
     //-----------------------------------------------------
     //--------  DETERMINAR TIPO DE OPERACION  -------------
@@ -35,6 +48,10 @@ jQuery(document).ready(function($){
             $('.amplificacion').show(300);
             $('.descripcion .title').html('➤ Amplificación');
             break;
+          case 'suma':
+            $('.suma').show(300);
+            $('.descripcion .title').html('➤ Suma');
+            break;
           default:
             // code block
         }        
@@ -62,6 +79,7 @@ jQuery(document).ready(function($){
         $('.equivalencia').hide(300);
         $('.simplificacion').hide(300);
         $('.amplificacion').hide(300);
+        $('.suma').hide(300);
         $('.figura').hide(300);
         $('.desarrollo').hide(300);
         $('.desarrollo-mixta').hide(300);
@@ -70,6 +88,7 @@ jQuery(document).ready(function($){
         $('.desarrollo-equivalencia').hide(300);
         $('.desarrollo-simplificacion').hide(300);
         $('.desarrollo-amplificacion').hide(300);
+        $('.desarrollo-suma').hide(300);
         $('.instrucciones').hide(300);
         $( ".numero" ).each(function() {
             $(this).val('');
@@ -81,12 +100,12 @@ jQuery(document).ready(function($){
     //------------  VALIDAR SOLO ENTEROS ------------------
     //-----------------------------------------------------
     $(".numero").keyup(function(){
-      $(this).css("background-color", "pink");
+      //$(this).css("background-color", "pink");
       $(this).val(parseInt($(this).val()));
     });
 
     $(".numero").focusout(function(){
-        $(this).css("background-color", "white");
+        //$(this).css("background-color", "white");
     });
 
     $(".mixta .numero").focus(function(){
@@ -204,6 +223,17 @@ jQuery(document).ready(function($){
                 amplificacion();
               }
             break;
+          case 'suma':
+              if ($('#'+padre).hasClass('Invalidate')) {
+                $('.desarrollo-suma').hide();
+              }else{
+                $('.desarrollo-suma').show(300);
+                $('html, body').animate({
+                    scrollTop: $(".desarrollo-suma").offset().top
+                }, 2000);
+                suma();
+              }
+            break;
         }
     });
 
@@ -216,34 +246,103 @@ jQuery(document).ready(function($){
         $('.btn-numerador').html(numerador+' <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador');
         $('.btn-denominador').html(denominador+' <i class="fas fa-arrow-left ml-2 mr-2"></i> Denominador');
 
-        $('.desarrollo canvas').clearCanvas();
+        
         var medida = (360/denominador);
 
         var anguloinicio = 0;
         var angulofin = 0;
-        for (var i = 1; i <= denominador; i++) {
+       $('.desarrollo canvas').setLayer('denominador', {
+            visible: false // set to true instead to show the layer again
+        }).drawLayers();
+        $('.desarrollo canvas').setLayer('numerador', {
+            visible: false // set to true instead to show the layer again
+        }).drawLayers();
+
+
+
+        for (var i = 0; i < denominador; i++) {
             angulofin = angulofin+medida;
-            if (numerador >= i) {
-                color = '#c33';
-                nombre = 'numerador'+i;
-            }else{
-                color = '#36c';
-                nombre = 'denominador'+i;
-            }
             $('.desarrollo canvas')
             .drawSlice({
               layer: false,
-              name: nombre,
-              groups: ['chart', 'labels'],
-              fillStyle: color,
+              group: ['denominador'],
+              fillStyle: '#36c',
               x: 180, y: 110,
               start: 0+anguloinicio, end: 0+angulofin,
               radius: 100,
               spread: 1 / 60
             });
             anguloinicio = angulofin;
+        }
+
+        setTimeout(function(){
+            for (var i = 0; i < numerador; i++) {
+                angulofin = angulofin+medida;
+                $('.desarrollo canvas')
+                .drawSlice({
+                  layer: false,
+                  group: ['numerador'],
+                  fillStyle: '#c33',
+                  x: 180, y: 110,
+                  start: 0+anguloinicio, end: 0+angulofin,
+                  radius: 100,
+                  spread: 1 / 60
+                });
+
+
+
+                anguloinicio = angulofin;
+            }
+
+        }, 2500);
+            /*
+            $('.desarrollo canvas')
+            .animateLayer('numerador', {
+              width: 100, height: 50
+            }, 1000, function(layer) {
+              // Callback function
+              $(this).animateLayer(layer, {
+                fillStyle: '#c33'
+              }, 'slow', 'swing');
+            });
+            */
+        /*
+        for (var i = 1; i <= denominador; i++) {
+            angulofin = angulofin+medida;
+            if (numerador >= i) {
+                color = '#c33';
+                nombre = 'numerador'+i;
+                group = 'num';
+            }else{
+                color = '#36c';
+                nombre = 'denominador'+i;
+                group = 'den';
+            }
+            $('.desarrollo canvas')
+            .drawSlice({
+              layer: true,
+              name: nombre,
+              fillStyle: '#36c',
+              x: 180, y: 110,
+              start: 0+anguloinicio, end: 0+angulofin,
+              radius: 100,
+              spread: 1 / 60
+            });
+
+            $('.desarrollo canvas')
+            ..animateLayerGroup('numerador'+i, {
+              width: 100, height: 50
+            }, 1000, function(layer) {
+              // Callback function
+              $(this).animateLayer(layer, {
+                fillStyle: '#c33'
+              }, 'slow', 'swing');
+            });
+
+            anguloinicio = angulofin;
 
         }
+        */
     }
 
     function fracioninpropia(numerador,denominador){
@@ -280,15 +379,15 @@ jQuery(document).ready(function($){
                         '<h5 class="col-lg-3 col-md-3 col-3 mt-3">'+
                             'cociente <i class="fas fa-arrow-right ml-2"></i>'+
                         '</h5>'+
-                        '<h3 class="cociente col-lg-1 col-md-1 col-1 pt-3" style="border: solid 2px blue;">'+cociente1+
+                        '<h3 class="cociente col-lg-1 col-md-1 col-1 pt-3" style="border: solid 2px #5cb85c; color:#5cb85c;">'+cociente1+
                         '</h3>'+
                         '<h6 class="resultado-residuo col-lg-8 col-md-8 col-6">'+
                             '<div class="col-lg-12 col-md-12 col-12 row">'+
-                               '<h5 class="residuo mr-3" style="border: solid 2px orange;">'+residuo+'</h5>    <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador '+
+                               '<h5 class="residuo mr-3" style="border: solid 2px #c33; color:#c33;">'+residuo+'</h5>    <i class="fas fa-arrow-left ml-2 mr-2"></i> Numerador '+
                             '</div>'+
                             '<hr class="col-lg-2 col-md-2 col-2 float-left" style="background-color: red;"><hr class="col-lg-10 col-md-10 col-10 border border-white">'+
                             '<div class="resultado-denominador col-lg-12 col-md-12 col-12 row">'+
-                               '<h5 class="denominador  mr-3" style="border: solid 2px purple;">'+denominador+'</h5>      <i class="fas fa-arrow-left ml-2 mr-2"></i> Divisor y denominador original'+
+                               '<h5 class="denominador  mr-3" style="border: solid 2px #36c; color:#36c;">'+denominador+'</h5>      <i class="fas fa-arrow-left ml-2 mr-2"></i> Divisor y denominador original'+
                             '</div>'+
                         '</h6>'+
                     '</div>');
@@ -309,7 +408,7 @@ jQuery(document).ready(function($){
         $('.'+container).html('<div class="enteros col-lg-6 col-md-6 col-6 row">'+
                   '</div>'+
                   '<div class="col-lg-6 col-md-6 col-6">'+
-                      '<canvas width="250" height="250" width="300" height="300" style="width: 200px; height:200px; margin: 0px auto; "></canvas>'+
+                      '<canvas width="320" height="320" width="300" height="300" style="width: 200px; height:200px; margin: 0px auto; "></canvas>'+
                   '</div>');
 
 
@@ -317,7 +416,6 @@ jQuery(document).ready(function($){
             $('.'+container+' .enteros').append('<div class="circulo  ml-2" style="width: 40px; height: 40px; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; background: #5cb85c;"></div>');
         }
 
-        $('.'+container+' canvas').clearCanvas();
         var medida = (360/denominador);
 
         var anguloinicio = 0;
@@ -326,29 +424,47 @@ jQuery(document).ready(function($){
         if(cociente > 0  && numerador == 0 || denominador == 0){
 
         }else{
-            for (var i = 1; i <= denominador; i++) {
+           $('.'+container+' canvas').setLayer('denominador', {
+                visible: false // set to true instead to show the layer again
+            }).drawLayers();
+            $('.'+container+' canvas').setLayer('numerador', {
+                visible: false // set to true instead to show the layer again
+            }).drawLayers();
+
+
+
+            for (var i = 0; i < denominador; i++) {
                 angulofin = angulofin+medida;
-                if (numerador >= i) {
-                    color = '#c33';
-                    nombre = 'numerador'+i;
-                }else{
-                    color = '#36c';
-                    nombre = 'denominador'+i;
-                }
                 $('.'+container+' canvas')
                 .drawSlice({
                   layer: false,
-                  name: nombre,
-                  groups: ['chart', 'labels'],
-                  fillStyle: color,
+                  group: ['denominador'],
+                  fillStyle: '#36c',
                   x: 180, y: 110,
                   start: 0+anguloinicio, end: 0+angulofin,
-                  radius: 60,
+                  radius: 100,
                   spread: 1 / 60
                 });
                 anguloinicio = angulofin;
-
             }
+
+            setTimeout(function(){
+                for (var i = 0; i < numerador; i++) {
+                    angulofin = angulofin+medida;
+                    $('.'+container+' canvas')
+                    .drawSlice({
+                      layer: false,
+                      group: ['numerador'],
+                      fillStyle: '#c33',
+                      x: 180, y: 110,
+                      start: 0+anguloinicio, end: 0+angulofin,
+                      radius: 100,
+                      spread: 1 / 60
+                    });
+                    anguloinicio = angulofin;
+                }
+
+            }, 2500);
         }
 
 
@@ -359,10 +475,10 @@ jQuery(document).ready(function($){
     //-------------  FUNCIONES DE COMPARACIÓN  ------------
     //-----------------------------------------------------
     function comparacion(){
-        numerador1=$("#compnumerador1").val();
-        numerador2=$("#compnumerador2").val();
-        denominador1=$("#compdenominador1").val();
-        denominador2=$("#compdenominador2").val();
+        numerador1=parseInt($("#compnumerador1").val());
+        numerador2=parseInt($("#compnumerador2").val());
+        denominador1=parseInt($("#compdenominador1").val());
+        denominador2=parseInt($("#compdenominador2").val());
         simbolo = $("#comp").val();
         ter1=numerador1*denominador2;
         ter2=numerador2*denominador1;
@@ -400,10 +516,34 @@ jQuery(document).ready(function($){
                 }
                 break;
         }
+
+        if(numerador1 >= denominador1){
+          console.log("mixta");
+          var residuo = (numerador1%denominador1);
+          var cociente = (numerador1/denominador1);
+
+          fraccion_mixta('figura-comparacion1',cociente,residuo,denominador1);
+        }else{
+          console.log("normal 1");
+          Draw('figura-comparacion1',numerador1,denominador1);
+        }
+
+        if (numerador2 >= denominador2) {
+          console.log("mixta");
+          var residuo = (numerador2%denominador2);
+          var cociente = (numerador2/denominador2);
+
+          fraccion_mixta('figura-comparacion2',cociente,residuo,denominador2);
+        }else{
+          console.log("normal 2");
+          Draw('figura-comparacion2',numerador2,denominador2);
+        }
+        
         $('.num1').html(numerador1);
         $('.num2').html(numerador2);
         $('.den1').html(denominador1);
         $('.den2').html(denominador2);
+
         $('.desarrollo-comparacion .explicacion').html('<p><b>Explicación:</b></p><p>1- Multiplicar numerador del primer termino por el denominador del segundo termino y se deja como primer termino. </p>'+
                                                         '<p><i>'+numerador1+' * '+denominador2+'= <b>'+ter1+'</b></i></p>'+
                                                         '<p>2-Multiplicar denominador del segundo termino por el numerador del primer termino y se deja como segundo termino</p>'+
@@ -418,12 +558,36 @@ jQuery(document).ready(function($){
     //-------------  FUNCIONES DE CONVERSIÓN  -------------
     //-----------------------------------------------------
     function conversion(){
-        var entero=$("#entero").val();
-        var numerador=$("#mixtonumerador").val();
-        var denominador=$("#mixtodenominador").val();
+        var entero=parseInt($("#entero").val());
+        var numerador=parseInt($("#mixtonumerador").val());
+        var denominador=parseInt($("#mixtodenominador").val());
 
         resnumerador=((entero*denominador)+parseInt(numerador));
 
+        $('.cociente-com').html(entero);
+        $('.num1-com').html(numerador);
+        $('.den1-com').html(denominador);
+
+
+        if (numerador >= denominador) {
+          var residuo = (numerador%denominador);
+          var cociente = (numerador/denominador);
+          fraccion_mixta('fig1-com',cociente,residuo,denominador);
+        }else{
+          fraccion_mixta('fig1-com',entero,numerador,denominador);  
+        }
+        
+
+        $('.num2-com').html(resnumerador);
+        $('.den2-com').html(denominador);
+
+        if (parseInt(resnumerador) >= parseInt(denominador)) {
+          var residuo = (resnumerador%denominador);
+          var cociente = (resnumerador/denominador);
+          fraccion_mixta('fig2-com',cociente,residuo,denominador);
+        }else{
+
+        }
 
 
        $('.resultado-conversion').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resnumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+denominador+'</div>'); 
@@ -539,6 +703,77 @@ jQuery(document).ready(function($){
         Draw('ampfraccion2',ampnumerador,ampdenominador);
     }
 
+    //-----------------------------------------------------
+    //----------------  FUNCIONES DE SUMA -----------------
+    //-----------------------------------------------------
+    function suma(){
+        let numerador1 = parseInt($("#sumanumerador1").val());
+        let denominador1 = parseInt($("#sumadenominador1").val());
+        let numerador2 = parseInt($("#sumanumerador2").val());
+        let denominador2 = parseInt($("#sumadenominador2").val());
+
+        let resresNumerador=0;
+        let resultadoNumerador1=0;
+        let resultadoDenominador=0;
+        
+
+        if(denominador1==denominador2){
+            resultadoNumerador=parseInt(numerador1)  + parseInt(numerador2);
+            resultadoDenominador=denominador2;
+            
+            $('.resultado-suma').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resultadoNumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resultadoDenominador+'</div>'); 
+
+            $('.desarrollo-suma .explicacion').html('<p><b>Explicación:</b>'+
+              '</p><p>Como las 2 fracciones tienen el mismo denominador, lo que tenemos que hacer es dejar el mismo denominador, que es <b>'+denominador1+'</b>, y sumar los numeradores:</p>'+
+              '<p>'+numerador1+' + '+numerador2+' = '+resultadoNumerador+'</p>'
+              );
+        }else{
+            resultadoNumerador1=numerador1 * denominador2;
+            resultadoNumerador2=numerador2 * denominador1;
+            resultadoDenominador=denominador1*denominador2;
+            resultadoNumerador=resultadoNumerador1 + resultadoNumerador2;
+
+            if(resultadoNumerador >= resultadoDenominador){
+                var residuo = (resultadoNumerador%resultadoDenominador);
+                var cociente = (resultadoNumerador/resultadoDenominador);
+
+
+                $('.resultado-suma').html('<div class="col-lg-4 col-md-4 col-12">'+parseInt(cociente)+'</div><div class="col-lg-4 col-md-4 col-12">'+residuo+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resultadoDenominador+'</div>'); 
+
+            }else{
+              $('.resultado-suma').html('<div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resultadoNumerador+'</div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12"><hr class="border border-danger"></div><div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-12">'+resultadoDenominador+'</div>'); 
+            }
+
+
+            $('.desarrollo-suma .explicacion').html('<p><b>Explicación:</b></p>'+
+              '<p>1- Se tuvo que buscar un denominador en comun multiplicando entre denominadores</p>'+
+              '<p>2- Multiplicar numerador del primer termino por el denominador del segundo termino</p>'+
+              '<p>3- Multiplicar numerador del segundo termino por el denominador del primero</p>'+
+              '<p>4- El resultado de cada una de esas multiplicaciones se suman y ese es tu numerador al sumar los dos terminos resultantes de la multiplicacion</p>'
+              );
+        }
+
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //-----------------------------------------------------
     //---------------  DIBUJAR FRACCIÓN  ------------------
@@ -552,29 +787,47 @@ jQuery(document).ready(function($){
 
         var anguloinicio = 0;
         var angulofin = 0;
-        for (var i = 1; i <= denominador; i++) {
-            angulofin = angulofin+medida;
-            if (numerador >= i) {
-                color = '#c33';
-                nombre = 'numerador'+i;
-            }else{
-                color = '#36c';
-                nombre = 'denominador'+i;
-            }
-            $('.'+container+' canvas')
-            .drawSlice({
-              layer: false,
-              name: nombre,
-              groups: ['chart', 'labels'],
-              fillStyle: color,
-              x: 180, y: 110,
-              start: 0+anguloinicio, end: 0+angulofin,
-              radius: 100,
-              spread: 1 / 60
-            });
-            anguloinicio = angulofin;
+       $('.'+container+' canvas').setLayer('denominador', {
+                visible: false // set to true instead to show the layer again
+            }).drawLayers();
+            $('.'+container+' canvas').setLayer('numerador', {
+                visible: false // set to true instead to show the layer again
+            }).drawLayers();
 
-        }
+
+
+            for (var i = 0; i < denominador; i++) {
+                angulofin = angulofin+medida;
+                $('.'+container+' canvas')
+                .drawSlice({
+                  layer: false,
+                  group: ['denominador'],
+                  fillStyle: '#36c',
+                  x: 180, y: 110,
+                  start: 0+anguloinicio, end: 0+angulofin,
+                  radius: 100,
+                  spread: 1 / 60
+                });
+                anguloinicio = angulofin;
+            }
+
+            setTimeout(function(){
+                for (var i = 0; i < numerador; i++) {
+                    angulofin = angulofin+medida;
+                    $('.'+container+' canvas')
+                    .drawSlice({
+                      layer: false,
+                      group: ['numerador'],
+                      fillStyle: '#c33',
+                      x: 180, y: 110,
+                      start: 0+anguloinicio, end: 0+angulofin,
+                      radius: 100,
+                      spread: 1 / 60
+                    });
+                    anguloinicio = angulofin;
+                }
+
+            }, 2500);
     }
 
 
@@ -689,8 +942,7 @@ function sumar(){
         desarrollofinal="<sup><label>"+resresNumerador+"</label></sup> / <sub><label>"+resultadoDenominador+"</label></sub>"
         desarrollointegrada=desarrollo+""+desarrollointer+" = "+desarrollofinal
         explicacion="<h4>Pasos</h4>1-Se suman directamente porque tienen un denominador en comun, es decir, tienen el mismo numero en el denominador"
-    }
-    else{
+    }else{
         resultadoNumerador1=numerador1 * denominador2
         resultadoNumerador2=numerador2 * denominador1
         resultadoDenominador=denominador1*denominador2
@@ -709,18 +961,12 @@ function sumar(){
     document.getElementById('resultadonumerador').innerHTML=resresNumerador;
     document.getElementById('resultadodenominador').innerHTML=resultadoDenominador;
     document.getElementById('desarrollo').innerHTML=desarrollointegrada+"<br>"+explicacion
-    // document.getElementById('resultadodenominadorexplicacion').innerHTML=resultadoDenominador;
-
-    // const data = document.getElementById("Explicacion");
-    // data.innerHTML = "";
-    // data.innerHTML="<h1>Tema 2</h1>";
-
-    // data.textContent;   // "Tema 1"
-    // data.innerHTML;     // "<h1>Tema 1</h1>"
-    // data.outerHTML;     // "<div class="data"><h1>Tema 1</h1></div>"
 
     return resresNumerador, resultadoDenominador 
 }
+
+
+
 
 function restar(){
     let numerador1 = document.getElementById("rnumerador1").value;
