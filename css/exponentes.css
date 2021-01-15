@@ -4,8 +4,8 @@
     line-height: 7;
 }
 .expo{
-	width: 60%;
-    height: 55%;
+	width: 60px;
+    height: 40px;
 }
 
 .respuesta{
@@ -15,4 +15,17 @@
 
 .shadow label{
 	font-size: 30px;
+}
+
+.input-field {
+
+  outline: none;
+}
+
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
 }

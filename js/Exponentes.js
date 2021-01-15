@@ -100,19 +100,26 @@ console.log('tipo');
             var base = $('#base1').val();
             var ex2   = $('#exp2').val();
             var base2 = $('#base2').val();
+            if(base==0){
+                base=1;
+                $('#base1').val('1');
+            }
+            if (base2==0){
+                base2=1;
+                $('#base2').val('1');
+            }
+            
         }
         switch (ope) {
              case 'multiplica':
-                
-                var sbase=base.split("");
-                var sbase2=base.split("");
+               
                 if(base==base2){
                     rbase=base;
-                    $('.explicacion').append('<p>Ya que las bases son iguales, la base sera igual a :</p><p><strong>'+ rbase+'</strong></p>');
+                    $('.explicacion').append('<p>Ya que las bases son iguales, la base sera igual a :</p><p><strong>'+ rbase+'x</strong></p>');
                 }else{
                     rbase=base*base2;
                      $('.explicacion').append('<p>Ya que las bases son distintas, estos valores se multiplican </p><p>'+base+' * '+base2+' = '+ rbase+
-                        '</p><p>Dando como base el valor de <strong>'+rbase+'</strong>.</p>');
+                        '</p><p>Dando como base el valor de <strong>'+rbase+'x</strong>.</p>');
                 }
                 
                 if(ex==ex2){
@@ -125,7 +132,7 @@ console.log('tipo');
                 }
 
                 var mexp=Math.pow(rbase, rex);
-                $('.resultado-exponente').append(rbase+' '+'<sup>'+rex+'</sup> = '+mexp);
+                $('.resultado-exponente').append(rbase+'x '+'<sup>'+rex+'</sup> = '+mexp);
                
 
                  // statements_1
@@ -133,11 +140,11 @@ console.log('tipo');
              case 'divide':
                  if(base==base2){
                     rbase=base;
-                    $('.explicacion').append('<p>Ya que las bases son iguales, la base sera igual a :</p><p><strong>'+ rbase+'</strong></p>');
+                    $('.explicacion').append('<p>Ya que las bases son iguales, la base sera igual a :</p><p><strong>'+ rbase+'x </strong></p>');
                 }else{
                     rbase=base/base2;
-                     $('.explicacion').append('<p>Ya que las bases son distintas, estos valores se dividen </p><p>'+base+' * '+base2+' = '+ rbase+
-                        '</p><p>Dando como base el valor de <strong>'+rbase+'</strong>.</p>');
+                     $('.explicacion').append('<p>Ya que las bases son distintas, estos valores se dividen </p><p>'+base+' / '+base2+' = '+ rbase+
+                        '</p><p>Dando como base el valor de <strong>'+rbase+'x</strong>.</p>');
                 }
                 
                 if(ex==ex2){
@@ -145,37 +152,36 @@ console.log('tipo');
                     $('.explicacion').append('<p>Ya que los exponentes son iguales el exponente sera:</p><p><strong>'+ rex+'</strong></p>');
                 }else{
                     rex=parseInt(ex)-parseInt(ex2);
-                     $('.explicacion').append('<p>Ya que los exponentes son diferentes, los valores se restan </p><p>'+ex+' + '+ex2+' = '+ rex+
+                     $('.explicacion').append('<p>Ya que los exponentes son diferentes, los valores se restan </p><p>'+ex+' - '+ex2+' = '+ rex+
                         '</p><p>Lo cual nos da como exponente el valor de <strong>'+rex+'</strong>.</p>');
                 }
                 
                
-                $('.resultado-exponente').append(rbase+' '+'<sup>'+rex+'</sup>');
+                $('.resultado-exponente').append(rbase+'x '+'<sup>'+rex+'</sup>');
                  // statements_1
                  break;
              case 'raiz':
                 var expf =$('#expfuera').val();
                 var raiz =$('#raiz').val();
                 var pexpr=$('#expp2').val();
-
-                if(expf%pexpr==0 && exp1>=expraiz){
+                
+                console.log("resu",Math.pow(raiz,expdiv),expf,pexpr);
+                if(expf%pexpr==0 && exp1>=pexpr){
                     var expdiv=parseInt(expf/pexpr);
-                    $('.explicacion').append('<p>El exponente raiz es<strong> '+expf+'</strong>, la potencia es <strong>'+pexpr+'</strong> base de potencia <strong>'+raiz+'</strong>.</p>';
-                    $('.explicacion').append('<p>La raiz paso a ser parte de la potencia ahora la expresion a resolver es <strong> '+raiz+'<sup>'+pexpr'/'+expf+'</sup></strong>.</p>';
-                    $('.explicacion').append('<p>Ya que el exponente puede ser dividido, este puede simplificarse a <strong> '+Math.pow(raiz,expdiv)+'<sup>'+expf/pexpr'</sup></strong>.</p>';
+                    $('.explicacion').append('<p>El exponente raiz es<strong> '+expf+'</strong>, la potencia es <strong>'+pexpr+'</strong> base de potencia <strong>'+raiz+'</strong>.</p>');
+                    $('.explicacion').append('<p>La raiz paso a ser parte de la potencia ahora la expresion a resolver es <strong> '+raiz+'<sup>'+pexpr+'/'+expf+'</sup></strong>.</p>');
+                    $('.explicacion').append('<p>Ya que el exponente puede ser dividido, este puede simplificarse a <strong> '+Math.pow(raiz,expdiv)+'<sup>'+expf/pexpr+'</sup></strong>.</p>');
                     
-                    
-                    // resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-                    document.getElementById("raizdesarrollo").innerHTML=desarrollo+desarrollo2+desarrollo3
-                    document.getElementById("raizresultado").innerHTML=Math.pow(coe1,exp1/expraiz)+'X<sup><sup>'+exp1/expraiz+'</sub></sup>'
+                    $('.resultado-exponente').append(Math.pow(raiz,expdiv)+'x'+'<sup>'+expdiv+'</sup>');
 
                 }else{
-                    desarrollo='<label>El exponente raiz es '+expraiz+', la potencia es '+exp1+' y el coeficiente es '+coe1
-                    desarrollo2=' <label>la otra forma de representar es </label><br> ('+coe1+' X )<sup><sup> '+exp1+'</sup>/<sub> '+expraiz+' </sub></sup><br>'
-                    desarrollo3='desarrollandolo queda de la siguiente forma <br>'+Math.pow(coe1,exp1/expraiz).toFixed(2)+'X<sup><sup>'+exp1+'</sup>/<sub>'+expraiz+'</sub></sup>'
-                    // resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-                    document.getElementById("raizdesarrollo").innerHTML=desarrollo+desarrollo2+desarrollo3
-                    document.getElementById("raizresultado").innerHTML=Math.pow(coe1,exp1/expraiz).toFixed(2)+'X<sup><sup>'+exp1+'</sup>/<sub>'+expraiz+'</sub></sup>'
+                    var expdiv=(expf/pexpr).toFixed(2);
+                    $('.explicacion').append('<p>El exponente raiz es<strong> '+expf+'</strong>, la potencia es <strong>'+pexpr+'</strong> base de potencia <strong>'+raiz+'</strong>.</p>');
+                    $('.explicacion').append('<p>Otra forma de representarntar es <strong>( '+raiz+'x)<sup>'+expf+'/'+pexpr+'</sup></strong>.</p>');
+                    $('.explicacion').append('<p>Ya desarrollado queda de la siguiente manera <strong> '+Math.pow(raiz,expdiv).toFixed(2)+'x<sup>'+expf+'/'+pexpr+'</sup></strong>.</p>');
+                    
+                    $('.resultado-exponente').append(Math.pow(raiz,expdiv).toFixed(2)+'x<sup>'+expf+'/'+pexpr+'</sup></strong>');
+                    
                 }
                  // statements_1
 
@@ -273,76 +279,3 @@ console.log('tipo');
 
 });
 
-
-function multiplicar(){
-    let coe1=document.getElementById("mulcoe1").value
-    let exp1=parseInt(document.getElementById("mulexp1").value)
-    let coe2=document.getElementById("mulcoe2").value
-    let exp2=parseInt(document.getElementById("mulexp2").value)
-    coe12=coe1*coe2
-    exp12=exp1+exp2
-    desarrollo='<label>Los coeficientes se multiplican</label><br>'+coe1+' * '+coe2+' = '+ coe12+'<br>'
-    desarrollo2='<label>Los exponentes se suman</label><br>'+exp1+' + '+exp2+' = '+ exp12+'<br>'
-    resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-    document.getElementById("muldesarrollo").innerHTML=desarrollo+desarrollo2+resultado
-    document.getElementById("mulresultado").innerHTML=coe12+'X<sup>'+exp12+'</sup>'
-
-
-}
-
-function dividir(){
-    let coe1=document.getElementById("divcoe1").value
-    let exp1=parseInt(document.getElementById("divexp1").value)
-    let coe2=document.getElementById("divcoe2").value
-    let exp2=parseInt(document.getElementById("divexp2").value)
-    coe12=coe1/coe2
-    exp12=exp1-exp2
-    desarrollo='<label>Los coeficientes se dividen</label><br>'+coe1+' / '+coe2+' = '+ coe12+'<br>'
-    desarrollo2='<label>Los exponentes se restan</label><br>'+exp1+' - '+exp2+' = '+ exp12+'<br>'
-    resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-    document.getElementById("divdesarrollo").innerHTML=desarrollo+desarrollo2+resultado
-    document.getElementById("divresultado").innerHTML=coe12+'X<sup>'+exp12+'</sup>'
-
-}
-
-function raiz(){
-    
-    let coe1=document.getElementById("raizcoe1").value
-    let expraiz=parseInt(document.getElementById("raizexp1").value)
-    let exp1=parseInt(document.getElementById("raizpotencia").value)
-    
-    // coe12=coe1/coe2
-    // exp12=exp1-exp2
-    if(exp1%expraiz==0 && exp1>=expraiz){
-        desarrollo='El exponente raiz es '+expraiz+', la potencia es '+exp1+' y el coeficiente es '+coe1
-        desarrollo2=' <br>La expresion quedaria de la siguiente forma</label><br> ('+coe1+' X )<sup><sup> '+exp1+'</sup>/<sub> '+expraiz+' </sub></sup><br>'
-        desarrollo3='<label>Debido a que el exponente '+exp1+ ' puede ser dividido entre la raiz '+expraiz+' este puede ser simplificado a '+exp1/expraiz+'<br>Simplificando la expresion quedaria <br>'+Math.pow(coe1,exp1/expraiz)+'X<sup><sup>'+exp1/expraiz+'</sub></sup>'
-        // resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-        document.getElementById("raizdesarrollo").innerHTML=desarrollo+desarrollo2+desarrollo3
-        document.getElementById("raizresultado").innerHTML=Math.pow(coe1,exp1/expraiz)+'X<sup><sup>'+exp1/expraiz+'</sub></sup>'
-
-    }else{
-        desarrollo='<label>El exponente raiz es '+expraiz+', la potencia es '+exp1+' y el coeficiente es '+coe1
-        desarrollo2=' <label>la otra forma de representar es </label><br> ('+coe1+' X )<sup><sup> '+exp1+'</sup>/<sub> '+expraiz+' </sub></sup><br>'
-        desarrollo3='desarrollandolo queda de la siguiente forma <br>'+Math.pow(coe1,exp1/expraiz).toFixed(2)+'X<sup><sup>'+exp1+'</sup>/<sub>'+expraiz+'</sub></sup>'
-        // resultado='<label>Dando como resultado</label><br>'+coe12+'X<sup>'+exp12+'</sup><br>'
-        document.getElementById("raizdesarrollo").innerHTML=desarrollo+desarrollo2+desarrollo3
-        document.getElementById("raizresultado").innerHTML=Math.pow(coe1,exp1/expraiz).toFixed(2)+'X<sup><sup>'+exp1+'</sup>/<sub>'+expraiz+'</sub></sup>'
-    }
-    
-}
-
-function potenciar(){
-    let coe1=document.getElementById("potcoe1").value
-    let exp1=parseInt(document.getElementById("potexp1").value)
-    let exp2=parseInt(document.getElementById("potexp2").value)
-    elevacion=Math.pow(coe1,exp2)
-    exp12=exp1*exp2
-    desarrollo='El coeficiente se eleva al numero que esta fuera del parentesis<br>('+coe1+')<sup>'+exp2+'</sup> ='+elevacion+'<br>'
-    desarrollo2='Los exponentes se multiplican<br>'+exp1+' * '+exp2+' = '+exp12+'<br>'
-    desarrollo3='La expresion quedaria<br>'+elevacion+'X<sup>'+exp12+'</sup>'
-
-    document.getElementById("potdesarrollo").innerHTML=desarrollo+desarrollo2+desarrollo3
-    document.getElementById("potresultado").innerHTML=elevacion+'X<sup>'+exp12+'</sup>'
-    
-}

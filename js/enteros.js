@@ -129,7 +129,7 @@ $('.number').on('input', function () {
 
 		categoria = $('#modelo').val();
 		$('.ejemplo').empty();
-
+		$('.residuos').empty();
 		$( ".numero" ).each(function() {
 			if ($(this).val() != '') {
 
@@ -165,41 +165,75 @@ $('.number').on('input', function () {
 		  		resultado = resultado+parseFloat(val);
 		  		
 			});
-		  	$('#resultado').val(resultado);
-		  	//--Obtener valor de input de resultado--
-		    	var num3=$('#resultado').val();
+		  	
 			//--Agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--	
-				$('.flecha').html('&#129044');
+				$('.flecha').html('<---');
 				$('.simbol').html('+');
 			
 		    $('.operacion-desglosada').show();
 		    $('.o-division').hide();
+		    $('.multiplica').hide(300);
+
 		    if(categoria == 'enteros'){
+		    	$('#resultado').val(resultado);
+		  	//--Obtener valor de input de resultado--
+		    	var num3=$('#resultado').val();
 		      	
 		    	  crear_explicacion(num1,num2,num3,operacion);				  
 				  		
-				  console.log("corto",res,"nevo",newnumone);
 		    }else {
 				
-		    	$('.ent').addClass('text-right').removeClass('text-left');
-		 		//crear_explicacion(num1,num2,num3,operacion);
+		    	$('.ent').addClass('text-right').removeClass('text-left');		    	
+		    	
 		    	var dres1 = num1.split(".");
 		    	var dres2 = num2.split(".");
+		    	if(dres1[1]==undefined&&dres2[1]==undefined){
+		    			var sfix=1;
+		    	}else if(dres1[1]!=undefined && dres2[1]==undefined){
+		    			var sfix=dres1[1].length;
+		    	}else if(dres1[1]==undefined&&dres2[1]!=undefined){
+		    			var sfix=dres2[1].length;
+		    	}else{
+		    		if(dres1[1].length>dres2[1].length){
+		    			var sfix=dres1[1].length;
+		    		}else {
+		    			var sfix=dres2[1].length;
+		    		}
+		    	}
+		    		$('#resultado').val(resultado.toFixed(sfix));
+		  			//--Obtener valor de input de resultado--
+		    		var num3=$('#resultado').val();
+		    	
+		    	
+		    	if(dres1[1]!=undefined){
+		    		var dec1=dres1[1].split("");
+		    	}else{
+		    		num1=parseFloat(num1);
+		    		num1=num1.toFixed(1);
+		    		dres1 = num1.toString().split(".");
+		    		var dec1=dres1[1].split("");
+		    	}
+		    	if(dres2[1]!=undefined){
+		    		var dec2=dres2[1].toString().split("");
+		    	}else{
+		    		num2=parseFloat(num2);
+		    		num2=num2.toFixed(1);
+		    		dres2 = num2.toString().split(".");
+		    		var dec2=dres2[1].split("");
+		    	}
+
 		    	var inpupri="";
 		    	var inpumen="";
 		    	var newnumdec=[];
 		    	var punto=".";
 		    	var ent1=[];
 		    	var ent2=[];		    	
-		    	var dec1=dres1[1].split("");
-		    	var dec2=dres2[1].split("");
 		    	    ent1=dres1[0].split("");
 		    		ent2=dres2[0].split("");
 		    		
 		    	ent1.push(punto);
 		    	ent2.push(punto);
-		    	console.log(dec1,dec2);
-		    	console.log(ent1,ent2);
+		    	
 
 		    	if(dec1.length >= dec2.length){
 				    var pridec = dec1;
@@ -248,8 +282,8 @@ $('.number').on('input', function () {
 				  num1=numc1.join('');
 				  num2=numc2.join('');
 
+
 				  crear_explicacion(num1,num2,num3,operacion);
-				  console.log(numc2,operacion,"numonedec",pridec,"numtwodec",newnumdec);
 		    	
 		    }
 		    	    
@@ -258,52 +292,71 @@ $('.number').on('input', function () {
 		    break;
 		//--Resta--
 		  case 'resta':
-		  //--Realizar operacion y pasar valor a input--
-		  	resultado = num.reduce(myFunc);
-		  	$('#resultado').val(resultado);
-
-			function myFunc(total, num) {
-			  return total - num;
-			}
+		  
 		  //--Obtener valor de input de resultado--
-		    var nummayor=parseInt(num1);
+		  if (categoria == 'enteros') {
+		  	var nummayor=parseInt(num1);
 		  	var nummen= parseInt(num2);
+		  }else {
+		  	var nummayor=parseFloat(num1);
+		  	var nummen= parseFloat(num2);
+		  }
+		    
 		  if (nummayor<nummen) {
 		  	nummayor=num2;
 		  	nummen= num1;
 		  	num1=nummayor;
 		  	num2=nummen;
 		  }
-		    var num3=$('#resultado').val();
-
+		    
+		  //--Realizar operacion y pasar valor a input--
+		  	resultado = nummayor-nummen;
+		  	
 		  //--Agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--				
 		    $('.simbol').html('-');
-		    $('.flecha').html('&#129044');
+		    $('.flecha').html('<---');
 		    $('.operacion-desglosada').show();
 		    $('.o-division').hide();
+		    $('.multiplica').hide(300);
+
 			if(categoria == 'enteros'){
+				$('#resultado').val(resultado);
+				var num3 =$('#resultado').val();
 
 		    crear_explicacion(num1,num2,num3,operacion);
 
 		   }else{
 		
-		   var dres1 = num1.split(".");
+		   		var dres1 = num1.split(".");
 		    	var dres2 = num2.split(".");
+		    	if(dres1[1]!=undefined){
+		    		var dec1=dres1[1].split("");
+		    	}else{
+		    		num1=parseFloat(num1);
+		    		num1=num1.toFixed(1);
+		    		dres1 = num1.toString().split(".");
+		    		var dec1=dres1[1].split("");
+		    	}
+		    	if(dres2[1]!=undefined){
+		    		var dec2=dres2[1].toString().split("");
+		    	}else{
+		    		num2=parseFloat(num2);
+		    		num2=num2.toFixed(1);
+		    		dres2 = num2.toString().split(".");
+		    		var dec2=dres2[1].split("");
+		    	}
+
 		    	var inpupri="";
 		    	var inpumen="";
 		    	var newnumdec=[];
 		    	var punto=".";
 		    	var ent1=[];
 		    	var ent2=[];		    	
-		    	var dec1=dres1[1].split("");
-		    	var dec2=dres2[1].split("");
 		    	    ent1=dres1[0].split("");
 		    		ent2=dres2[0].split("");
 		    		
 		    	ent1.push(punto);
 		    	ent2.push(punto);
-		    	console.log(dec1,dec2);
-		    	console.log(ent1,ent2);
 
 		    	if(dec1.length >= dec2.length){
 				    var pridec = dec1;
@@ -351,13 +404,16 @@ $('.number').on('input', function () {
 				  	
 				  num1=numc1.join('');
 				  num2=numc2.join('');
-
-				  crear_explicacion(num1,num2,num3,operacion);
-				  console.log(numc2,operacion,"numonedec",pridec,"numtwodec",newnumdec);
+				  var ndec= newnumdec.length;
+				   resultado=resultado.toFixed(ndec);
+				    $('#resultado').val(resultado);
+				    var num3=$('#resultado').val();
+				    crear_explicacion(num1,num2,num3,operacion);
+				  
 		   }
-		    
+		   
 		    extractIntrucciones(operacion,categoria);
-		    console.log(data) ;
+		    
 		    break;
 		//--Multiplicacion--
 		   case 'multiplicacion':
@@ -371,16 +427,43 @@ $('.number').on('input', function () {
 			//--obtener valores de inputs--
 				var num1=$('#firstnumber').val();
 				var num2=$('#secondnumber').val();
+				
+				
 			//--realizar operacion y pasar valor a input--
 				resultado= parseFloat(num1)*parseFloat(num2);
-				$('#resultado').val(resultado);
+				if (categoria=="decimales") {
+					var nudec1=num1.split(".");
+					var nudec2=num2.split(".");
+					if (nudec1[1]!=undefined && nudec2[1]!=undefined) {
+						var rnudec1=nudec1[1].length;
+						var rnudec2=nudec2[1].length;
+						
+						var fix=rnudec1+rnudec2;
+						
+					}else if(nudec1[1]==undefined && nudec2[1]!=undefined){
+						var rnudec2=nudec2[1].length;
+						var fix=rnudec2;
+					}else if(nudec2[1]==undefined && nudec1[1]!=undefined){
+						var rnudec1=nudec1[1].length;
+						var fix=rnudec1;
+					}else {
+						var fix=0;
+					}
+					
+					resultado=resultado.toFixed(fix);
+					$('#resultado').val(resultado);
+				}else {
+				$('#resultado').val(resultado);	
+				}
+				
 			//--obtener valor de input de resultado--
 				var num3=$('#resultado').val();
 			//--agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--
 				$('.simbol').html('X');
 				$('.flecha').html('');
-		    	$('.operacion-desglosada').show();
+		    	$('.operacion-desglosada').show(300);
 		    	$('.o-division').hide();
+		    	$('.multiplica').show(300);
 		    	$('.operacion-desglosada').addClass('text-right').removeClass('text-left');
 		    	crear_explicacion(num1,num2,num3,operacion);
 		    	var multiplicando=num1.split("");
@@ -392,14 +475,15 @@ $('.number').on('input', function () {
 		    	$('.multiplica').empty();
 		    	$('.resmulti').empty();
 		    	//Realiza multiplicacion por multiplicador
-		    	  for (var m = (multiplicador.length-1); m >= 0; m--) {
+		    	console.log(multiplicador.length, "multi",multiplicando.length);
+		    	if(multiplicador.length!=1 && multiplicando.length!=1){
+		    		for (var m = (multiplicador.length-1); m >= 0; m--) {
 		    	  		if(multiplicador[m]!="."){
 		    	  			valm[a]=multiplicador[m]*numsd;
 			    	  		var ures=valm[a].toString().split("");
-			    	  		console.log("ures",ures);
+			    	  		
 			    	  		$('.multiplica').append('<div class="row numresul'+a+' ejemplo">');
 			    	  		if(a==0){
-			    	  			
 			    	  			$.each(ures,function(i,val){
 			    	  				if (val!=".") {
 			    	  				$('.numresul'+a).append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');
@@ -409,7 +493,7 @@ $('.number').on('input', function () {
 			    	  		}else{
 			    	  			
 			    	  			$.each(ures,function(i,val){
-			    	  				if (val!=".") {
+			    	  				if (val!="." ) {
 			    	  				$('.numresul'+a).append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');
 			    	  				}
 			    	  			});
@@ -429,6 +513,8 @@ $('.number').on('input', function () {
 		    	  		}
 		    	  		
 				  }
+		    	}
+		    	  
 				  var dar=0;
 				  var punto="no";
 				  var rs=multiplicando.length;
@@ -440,7 +526,7 @@ $('.number').on('input', function () {
 		    	  			if(mr!=rs-1){
 		    	  				rsm[mr]=rsm[mr]+parseInt(rsm[mr+1]);
 		    	  			}		    	  			
-		    	  			console.log("multi",multiplicador[rm],multiplicando[mr],rsm[mr]);
+		    	  			
 		    	  			if(rsm[mr]>=10){
 		    	  				var uni= (rsm[mr]/10).toString().split(".");
 		    	  				rsm[mr]=uni[0];
@@ -453,7 +539,7 @@ $('.number').on('input', function () {
 			    	  				rsm[mr]="&nbsp&nbsp";
 					  			}
 		    	  			}
-		    	  			console.log("i",mr,rsm[mr]);	
+		    	  				
 		    	  			//dar++;	
 		    	  		  	  		
 				  		}
@@ -467,8 +553,7 @@ $('.number').on('input', function () {
 		    	  			$('.reside'+rm).append('<button type="button" class="btn residuo mr-1" disabled><b>'+rsm[i]+'</b>');
 		    	  		}
 		    	  	}
-				  	
-				  	console.log(rsm,rm);
+
 				  	rsm=[];
 				  	dar=0;
 				  	}
@@ -489,6 +574,8 @@ $('.number').on('input', function () {
 			//--obtener valores de inputs--
 				var num1=$('#firstnumber').val();
 				var num2=$('#secondnumber').val();
+				$('.multiplica').hide(300);
+
 			//--realizar operacion y pasar valor a input--
 			resultado= (num1/num2);
 			
@@ -506,8 +593,7 @@ $('.number').on('input', function () {
 				var num3=$('#resultado').val();
 			//--agregar simbolo a operacion seleccionada, poner o quitar flecha en operacion--
 				$('.simbol').html('/');
-				$('.flecha').html('');
-		    
+				$('.flecha').html('');		    	
 		    	$('.operacion-desglosada').hide();
 		    	$('.o-division').show();
 		    	$('.residuos').empty();
@@ -522,6 +608,7 @@ $('.number').on('input', function () {
 				$.each(divisor, function(i, val){
 					$('.divisor').append('<button type="button" class="btn numero mr-1" disabled><b>'+val+'</b>');				
 				});
+
 				// variable total digitos divisor
 				var nrestar=0;
 				var numd=divisor.length;
@@ -535,16 +622,28 @@ $('.number').on('input', function () {
 
 				//dividir dividendo a numero de digitos iguales a divisor
 				for (var dg=0;dg <= numd-1;dg++){
-					digito=digito+dividendo[dg];
+					
+					if(dividendo[dg]!=undefined){
+						digito=digito+dividendo[dg];						
+					}else{
+						digito=digito+"0";
+					}
+					console.log("dividendo",digito);
 					if(dg==vnumd){
-						dgdiv=digito;	
+						dgdiv=digito;
+						console.log("dividendo==",digito);	
 						if(num2>digito){
-							dgdiv=digito+dividendo[dg+1];
+							if(dividendo[dg+1]!=undefined){
+								dgdiv=digito+dividendo[dg+1];
+							}else{
+								dgdiv=digito+"0";
+							}
+							
 							numd=numd+1;
 						}										
 					}
 				}
-
+					console.log("dgdiv==",dgdiv);
 				for (var i = numd-1; i >= 1; i--) {
 					console.log("numd-1",numd,"i",i);
 					dvres.unshift("&nbsp&nbsp");
@@ -577,7 +676,8 @@ $('.number').on('input', function () {
 					
 					$('.residuos').append('</div>');
 					$('.residuos').append('<div class="row restardiv igual-'+dv+'">');
-					console.log("resta",digito,dividendo[numd]);
+
+					console.log("resta",dgdiv,digito,dividendo[numd]);
 					if(dividendo[numd]!==undefined){
 						digito=digito+""+dividendo[numd];
 					}else{
@@ -694,7 +794,6 @@ $('.number').on('input', function () {
 
 				  var index = (nummen.length-1);
 				  for (var d = (numpri.length-1); d >= 0; d--) {
-				      console.log("valor d ",d, nummen[index]);
 				      if (nummen[index] == undefined) {
 				        newnumone[d] = 0;
 				      }else{
@@ -803,7 +902,7 @@ $('.number').on('input', function () {
 		  			minuendo[r]=parseInt(minuendo[r]);
 		  			sustraendo[r]=parseInt(sustraendo[r]);
 		  			var resta = minuendo[r]-sustraendo[r];
-		  			console.log("La resta",resta);
+		  	
 		  		if(resta<0){
 		  			minuendo[r-1]=(minuendo[r-1])-1;
 		  			res[r]=minuendo[r]+10;
@@ -817,8 +916,6 @@ $('.number').on('input', function () {
 		  			}
 		  			
 		  		}
-
-		  		console.log(res);
 		  		
 		  }
 
@@ -838,15 +935,13 @@ $('.number').on('input', function () {
 		var sustraendo=valor2;
 		var cambio="no";
 		  
-		  console.log("input1",minuendo,"input2",sustraendo);
+		  
 		  for(var r=(minuendo.length-1);r>=0;r--){
 		  			minuendo[r]=parseInt(minuendo[r]);
 		  			sustraendo[r]=parseInt(sustraendo[r]);
 		  			var resta = minuendo[r]-sustraendo[r];
-		  			console.log("La resta",resta);
 		  		if(resta<0){
 		  			if(isNaN(minuendo[r-1])==true){
-		  				console.log("entre decimal");
 		  				minuendo[r-2]=(minuendo[r-2])-1;
 		  				res[r-1]=".";
 		  				res[r]=minuendo[r]+10;
@@ -866,8 +961,6 @@ $('.number').on('input', function () {
 		  			}
 		  			
 		  		}
-
-		  		console.log(res);
 		  		
 		  }
 
